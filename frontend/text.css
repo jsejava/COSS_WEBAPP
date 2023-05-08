@@ -1,0 +1,18 @@
+border-product {
+  padding: 15px;
+  border: 1px solid #f3f3f3;
+  border-radius: 5px;
+}
+
+.welcomeBack {
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  /* background-color: #f3fbf7; */
+}
+.welcomeBack img {
+  width: 50%;
+  height: 250px;
+  object-fit: contain;
+}
