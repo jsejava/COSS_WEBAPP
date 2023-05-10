@@ -18,6 +18,7 @@ const Login = ({ history }) => {
   useEffect(() => {
     if (userInfo) {
       history.push("/");
+    } else {
     }
   }, [userInfo, history]);
 
