@@ -1,11 +1,11 @@
 import React from "react";
-import Header from "../components/Header";
-import ShopSection from "../components/homeComponents/ShopSection";
-import ContactInfo from "../components/homeComponents/ContactInfo";
-import CalltoActionSection from "../components/homeComponents/CalltoActionSection";
-import Footer from "../components/Footer";
+import Header from "./../components/Header";
+import ShopSection from "./../components/homeComponents/ShopSection";
+import ContactInfo from "./../components/homeComponents/ContactInfo";
+import CalltoActionSection from "./../components/homeComponents/CalltoActionSection";
+import Footer from "./../components/Footer";
 
-const ShopScreen = ({ match }) => {
+const HomeScreen = ({ match }) => {
   window.scrollTo(0, 0);
   const keyword = match.params.keyword;
   const pagenumber = match.params.pagenumber;
@@ -20,4 +20,4 @@ const ShopScreen = ({ match }) => {
   );
 };
 
-export default ShopScreen;
+export default HomeScreen;

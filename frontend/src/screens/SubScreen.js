@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import Header from "./../components/Header";
+import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removefromcart } from "../Redux/Actions/cartActions";
 
-const CartScreen = ({ match, location, history }) => {
+const SubScreen = ({ match, location, history }) => {
   window.scrollTo(0, 0);
   const dispatch = useDispatch();
   const productId = match.params.id;
@@ -35,21 +35,21 @@ const CartScreen = ({ match, location, history }) => {
       <div className="container">
         {cartItems.length === 0 ? (
           <div className=" alert alert-info text-center mt-3">
-            Your cart is empty
+            You Do Not Have Any Subscrption
             <Link
               className="btn btn-success mx-5 px-5 py-3"
-              to="/shop"
+              to="/"
               style={{
                 fontSize: "12px",
               }}
             >
-              SHOPPING NOW
+              SUBSCRIBE NOW
             </Link>
           </div>
         ) : (
           <>
             <div className=" alert alert-info text-center mt-3">
-              Total Cart Products
+              Your Subscription
               <Link className="text-success mx-2" to="/cart">
                 ({cartItems.length})
               </Link>
@@ -72,7 +72,7 @@ const CartScreen = ({ match, location, history }) => {
                   </Link>
                 </div>
                 <div className="cart-qty col-md-2 col-sm-5 mt-md-5 mt-3 mt-md-0 d-flex flex-column justify-content-center">
-                  <h6>QUANTITY</h6>
+                  <h6>Time</h6>
                   <select
                     value={item.qty}
                     onChange={(e) =>
@@ -101,12 +101,12 @@ const CartScreen = ({ match, location, history }) => {
             </div>
             <hr />
             <div className="cart-buttons d-flex align-items-center row">
-              <Link to="/shop" className="col-md-6 ">
+              <Link to="/" className="col-md-6 ">
                 <button>Continue To Shopping</button>
               </Link>
               {total > 0 && (
                 <div className="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
-                  <button onClick={checkOutHandler}>Checkout</button>
+                  <button onClick={checkOutHandler}>Order</button>
                 </div>
               )}
             </div>
@@ -117,4 +117,4 @@ const CartScreen = ({ match, location, history }) => {
   );
 };
 
-export default CartScreen;
+export default SubScreen;

@@ -65,7 +65,7 @@ const OrderDetailmain = (props) => {
                   <option>Change status</option>
                   <option>Awaiting payment</option>
                   <option>Confirmed</option>
-                  <option>Shipped</option>
+                  <option>Pending</option>
                   <option>Delivered</option>
                 </select>
                 <Link className="btn btn-success ms-2" to="#">

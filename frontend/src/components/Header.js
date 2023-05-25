@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/Actions/userAction";
-import Navbar from "./homeComponents/navbar/navbar";
+import Navbar from "./navBar/navbar";
+import { removefromcart } from "../Redux/Actions/cartActions";
 
 const Header = () => {
   const [keyword, setKeyword] = useState();

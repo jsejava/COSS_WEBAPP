@@ -1,4 +1,5 @@
 import axios from "axios";
+import { CART_CLEAR_ITEMS } from "../Constants/CartConstants";
 import { ORDER_LIST_MY_RESET } from "../Constants/OrderConstants";
 import {
   USER_DETAILS_FAIL,
@@ -52,6 +53,7 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: ORDER_LIST_MY_RESET });
+  dispatch({ type: CART_CLEAR_ITEMS });
 };
 
 // REGISTER

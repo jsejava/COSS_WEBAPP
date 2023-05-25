@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/Actions/userAction";
-import Navbar from "./homeComponents/navbar/navbar";
+import Navbar from "./navBar/navbar";
 
 const SHeader = () => {
   const [keyword, setKeyword] = useState();
@@ -197,10 +197,10 @@ const SHeader = () => {
                   </>
                 )}
 
-                <Link to="/cart">
+                {/* <Link to="/cart">
                   <i className="fas fa-shopping-bag"></i>
                   <span className="badge">{cartItems.length}</span>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>

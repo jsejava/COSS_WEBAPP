@@ -23,9 +23,12 @@ const PaymentScreen = ({ history }) => {
     if (paymentMethod == null) {
       window.alert("Select a payement Methode");
       return;
+    } else if (paymentMethod == "CampusPay") {
+      dispatch(savePaymentMethod(paymentMethod));
+      history.push("/placeorder");
+    } else {
+      window.alert("Not Available");
     }
-    dispatch(savePaymentMethod(paymentMethod));
-    history.push("/placeorder");
   };
   return (
     <>
@@ -41,10 +44,10 @@ const PaymentScreen = ({ history }) => {
               <input
                 className="form-check-input"
                 type="radio"
-                value="PayPal"
+                value="PayStack"
                 onChange={(e) => setPaymentMethod(e.target.value)}
               />
-              <label className="form-check-label">PayPal or Credit Card</label>
+              <label className="form-check-label">PayStack</label>
             </div>
             <div className="radio-container">
               <input
@@ -55,7 +58,7 @@ const PaymentScreen = ({ history }) => {
               />
               <label className="form-check-label">CampusPay</label>
             </div>
-            <div className="radio-container">
+            {/* <div className="radio-container">
               <input
                 className="form-check-input"
                 type="radio"
@@ -63,7 +66,7 @@ const PaymentScreen = ({ history }) => {
                 onChange={(e) => setPaymentMethod(e.target.value)}
               />
               <label className="form-check-label">Cash</label>
-            </div>
+            </div> */}
           </div>
 
           <button type="submit">Continue</button>

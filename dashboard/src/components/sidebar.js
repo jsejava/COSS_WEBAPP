@@ -97,14 +97,15 @@ const Sidebar = () => {
             </li>
 
             <li className="menu-item">
-              <NavLink
+              {/* <a href="http://localhost:4000/add-expense"></a> */}
+              <a
                 activeClassName="active"
-                className="menu-link disabled"
-                to="/transaction"
+                className="menu-link"
+                href="http://localhost:4000"
               >
                 <i className="icon fas fa-usd-circle"></i>
                 <span className="text">Transactions</span>
-              </NavLink>
+              </a>
             </li>
           </ul>
           <br />

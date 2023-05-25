@@ -36,24 +36,17 @@ const PlaceOrderScreen = ({ history }) => {
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`);
-      localStorage.setItem("orderId", order._id);
-
       dispatch({ type: ORDER_CREATE_RESET });
     }
   }, [history, dispatch, success, order]);
 
   const placeOrderHandler = () => {
-    dispatch(
-      createOrder({
-        orderItems: cart.cartItems,
-        shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod,
-        itemsPrice: cart.itemsPrice,
-        shippingPrice: cart.shippingPrice,
-        taxPrice: cart.taxPrice,
-        totalPrice: cart.totalPrice,
-      })
-    );
+    // document.cookie =
+    //   "total=; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
+    // document.cookie = `name=; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure`;
+    const orderId = localStorage.getItem("orderId");
+    console.log(orderId);
+    history.push(`/pay/${orderId}`);
   };
 
   return (
@@ -117,7 +110,7 @@ const PlaceOrderScreen = ({ history }) => {
         </div>
 
         <div className="row order-products justify-content-between">
-          <div className="col-lg-8">
+          {/* <div className="col-lg-8">
             {cart.cartItems.length === 0 ? (
               <Message variant="alert-info mt-5">Your cart is empty</Message>
             ) : (
@@ -144,9 +137,9 @@ const PlaceOrderScreen = ({ history }) => {
                 ))}
               </>
             )}
-          </div>
+          </div> */}
           {/* total */}
-          <div className="col-lg-3 d-flex align-items-end flex-column mt-5 subtotal-order">
+          {/* <div className="col-lg-3 d-flex align-items-end flex-column mt-5 subtotal-order">
             <table className="table table-bordered">
               <tbody>
                 <tr>
@@ -176,22 +169,19 @@ const PlaceOrderScreen = ({ history }) => {
               </tbody>
             </table>
             {cart.cartItems.length === 0 ? null : (
-              <>
-                <button type="submit" onClick={placeOrderHandler}>
-                  PLACE ORDER
-                </button>
-                <br></br>
-                <Link to="/shop" className="btn btn-success me-2">
-                  CAMCEL ORDER
-                </Link>
-              </>
+              <button type="submit" onClick={placeOrderHandler}>
+                PLACE ORDER
+              </button>
             )}
             {error && (
               <div className="my-3 col-12">
                 <Message variant="alert-danger">{error}</Message>
               </div>
-            )}
-          </div>
+            )} */}
+          {/* </div> */}
+          <button type="submit" onClick={placeOrderHandler}>
+            Confirm Delivery Address
+          </button>
         </div>
       </div>
     </>

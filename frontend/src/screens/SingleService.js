@@ -43,7 +43,10 @@ const SingleService = ({ history, match }) => {
 
   const AddToCartHandle = (e) => {
     e.preventDefault();
-    history.push(`/cart/${serviceId}?qty=${qty}`);
+    history.push(`/sub/${serviceId}?qty=${qty}`);
+  };
+  const checkOutHandler = () => {
+    history.push("/login?redirect=shipping");
   };
   const submitHandler = (e) => {
     e.preventDefault();
@@ -116,7 +119,7 @@ const SingleService = ({ history, match }) => {
                           </select>
                         </div>
                         <button
-                          onClick={AddToCartHandle}
+                          onClick={checkOutHandler}
                           className="round-black-btn"
                         >
                           Request Service

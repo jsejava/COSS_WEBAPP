@@ -12,6 +12,7 @@ const ServiceScreen = ({ match }) => {
   return (
     <div>
       <SHeader />
+
       <ServiceSection keyword={keyword} pagenumber={pagenumber} />
       <CalltoActionSection />
       <ContactInfo />
