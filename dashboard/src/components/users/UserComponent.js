@@ -10,6 +10,7 @@ const UserComponent = () => {
 
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
+  console.log(users);
 
   useEffect(() => {
     dispatch(listUser());
@@ -19,9 +20,12 @@ const UserComponent = () => {
       <div className="content-header">
         <h2 className="content-title">Customers</h2>
         <div>
-          <Link to="#" className="btn btn-primary">
-            <i className="material-icons md-plus"></i> Create new
-          </Link>
+          <a
+            href="http://localhost:4000/edit-wallet"
+            className="btn btn-primary"
+          >
+            <i className="material-icons md-plus"></i> Load User Wallet
+          </a>
         </div>
       </div>
 
@@ -72,7 +76,9 @@ const UserComponent = () => {
                       />
                     </div>
                     <div className="card-body">
-                      <h5 className="card-title mt-5">{user.name}</h5>
+                      <h5 className="card-title mt-5">
+                        {user.firstname} {user.lastname}
+                      </h5>
                       <div className="card-text text-muted">
                         {user.isAdmin === true ? (
                           <p className="m-0">Admin</p>
@@ -83,6 +89,7 @@ const UserComponent = () => {
                         <p>
                           <a href={`mailto:${user.email}`}>{user.email}</a>
                         </p>
+                        <p></p>
                       </div>
                     </div>
                   </div>

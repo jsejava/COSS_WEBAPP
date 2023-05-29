@@ -20,7 +20,9 @@ const OrderScreen = ({ history, match }) => {
   const { order, loading, error } = orderDetails;
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
-
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  console.log(order);
   if (!loading) {
     const addDecimals = (num) => {
       return (Math.round(num * 100) / 100).toFixed(2);
@@ -49,33 +51,53 @@ const OrderScreen = ({ history, match }) => {
   //   //document.cookie = "test2=World; SameSite=None; Secure";
   //   document.cookie = `test2=${order.totalPrice}; SameSite=None; Secure`;
   // };
-  const show = () => {
-    showCookieValue();
-  };
+  // const show = () => {
+  //   showCookieValue();
+  // };
 
-  const cookieValue = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("total="))
-    ?.split("=")[1];
+  // const cookieValue = document.cookie
+  //   .split("; ")
+  //   .find((row) => row.startsWith("total="))
+  //   ?.split("=")[1];
 
-  function showCookieValue() {
-    console.log(cookieValue);
-  }
+  // function showCookieValue() {
+  //   console.log(cookieValue);
+  // }
+
   function doOnce() {
-    // set cookies
-    document.cookie = `total=${order.totalPrice}; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;path=/add-expense`;
-    order.orderItems.map((item, index) => {
-      const name = item.name;
-      document.cookie = `name=${name}; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;path=/add-expense`;
+    const total = order.totalPrice;
+    const x = order.orderItems;
+    let names = "";
+    x.forEach((element, index, array) => {
+      names += element.name + " ";
     });
-    console.log("create");
+    const cookieName = names;
+    //console.log(cookieVal);
+    document.cookie = `item=${cookieName}; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;path=/add-expense`;
+    document.cookie = `total=${total} expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;path=/add-expense`;
+    console.log(cookieName);
+    console.log(typeof cookieName);
+    // set cookies
+    // const itemCookie = JSON.stringify(items);
+
+    // const items = x.map((item) => ({
+    //   name: item.name,
+    // }));
+    // let txt = "";
+    // for (let item in items) {
+    //   txt += items.name[item] + " ";
+    // }
+
+    // items.total = total;
+    // console.log(items);
   }
-  function resetOnce() {
-    console.log("okay");
-    document.cookie =
-      "total=; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
-    document.cookie = `name=; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure`;
-  }
+
+  // function resetOnce() {
+  //   console.log("okay");
+  //   document.cookie =
+  //     "total=; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
+  //   document.cookie = `name=; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure`;
+  // }
 
   return (
     <>
@@ -100,7 +122,9 @@ const OrderScreen = ({ history, match }) => {
                       <h5>
                         <strong>Customer</strong>
                       </h5>
-                      <p>{order.user.name}</p>
+                      <p>
+                        {userInfo.firstname} {userInfo.lastname}
+                      </p>
                       <p>
                         <a href={`mailto:${order.user.email}`}>
                           {order.user.email}
@@ -121,7 +145,11 @@ const OrderScreen = ({ history, match }) => {
                       <h5>
                         <strong>Order info</strong>
                       </h5>
-                      <p>Name: {order.shippingAddress.country}</p>
+                      {/* username */}
+                      {/* <p>Name: {order.shippingAddress.country}</p> */}
+                      <p>
+                        Name: {userInfo.firstname} {userInfo.lastname}
+                      </p>
                       <p>Pay method: {order.paymentMethod}</p>
                       {order.isPaid ? (
                         <div className="bg-info p-2 col-12">
@@ -214,26 +242,26 @@ const OrderScreen = ({ history, match }) => {
                         <td>
                           <strong>Products</strong>
                         </td>
-                        <td>${order.itemsPrice}</td>
+                        <td>Gh₵ {order.itemsPrice}</td>
                       </tr>
                       <tr>
                         <td>
                           <strong>Shipping</strong>
                         </td>
-                        <td>${order.shippingPrice}</td>
+                        <td>Gh₵ {order.shippingPrice}</td>
                       </tr>
                       <tr>
                         <td>
                           <strong>Tax</strong>
                         </td>
-                        <td>${order.taxPrice}</td>
+                        <td>Gh₵ {order.taxPrice}</td>
                       </tr>
                       <tr>
                         <td>
                           <strong>Total</strong>
                         </td>
                         {/* total */}
-                        <td>${order.totalPrice}</td>
+                        <td>Gh₵ {order.totalPrice}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -243,10 +271,21 @@ const OrderScreen = ({ history, match }) => {
                         <a href="http://localhost:4000/add-expense">
                           <button
                             id="myBtn"
-                            className="round-black-btn"
+                            className="round-black-btn mb-4"
                             onClick={doOnce}
                           >
                             Make payment
+                          </button>
+                        </a>
+                      }
+                      {
+                        <a href="/order-list">
+                          <button
+                            id="myBtn"
+                            className="round-black-btn"
+                            // onClick={doOnce}
+                          >
+                            Pay Later
                           </button>
                         </a>
                       }
@@ -263,3 +302,24 @@ const OrderScreen = ({ history, match }) => {
 };
 
 export default OrderScreen;
+
+// <div
+//   style={{
+//     display: "flex",
+//     height: "10px",
+//     width: "100%",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     flexDirection: "column",
+//     marginTop: "40px",
+//   }}
+// >
+//   <button
+//     // onClick={() => dispatch(logoutAction())}
+//onClick={placeOrderHandler}
+//     type="button"
+//     class="btn btn-primary btn-lg"
+//   >
+//     Confirm Order Info
+//   </button>
+// </div>;

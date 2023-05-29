@@ -71,7 +71,7 @@ const Header = () => {
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="#">
-              English
+              CampusStore
             </Link>
           </li>
           <li className="dropdown nav-item">

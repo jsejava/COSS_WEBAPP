@@ -2,6 +2,7 @@ import React from "react";
 
 const OrderDetailInfo = (props) => {
   const { order } = props;
+  // console.log("order", order);
   return (
     <div className="row mb-5 order-info-wrap">
       <div className="col-md-6 col-lg-4">
@@ -12,7 +13,8 @@ const OrderDetailInfo = (props) => {
           <div className="text">
             <h6 className="mb-1">Customer</h6>
             <p className="mb-1">
-              {order.user.name} <br />
+              {order.user.firstname} {order.user.lastname}
+              <br />
               <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
             </p>
           </div>
@@ -26,8 +28,8 @@ const OrderDetailInfo = (props) => {
           <div className="text">
             <h6 className="mb-1">Order info</h6>
             <p className="mb-1">
-              Name: {order.shippingAddress.country} <br /> Pay method:{" "}
-              {order.paymentMethod}
+              Name: {order.user.firstname} {order.user.lastname} <br /> Pay
+              method: {order.paymentMethod}
             </p>
           </div>
         </article>

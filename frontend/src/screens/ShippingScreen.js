@@ -51,13 +51,13 @@ const ShippingScreen = ({ history }) => {
             required
             onChange={(e) => setPostalCode(e.target.value)}
           />
-          <input
+          {/* <input
             type="text"
             placeholder="Enter First Name"
             value={country}
             required
             onChange={(e) => setCountry(e.target.value)}
-          />
+          /> */}
           <button type="submit">Continue</button>
         </form>
       </div>

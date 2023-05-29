@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
 import ProfileTabs from "../components/profileComponents/ProfileTabs";
 import { getUserDetails } from "../Redux/Actions/userAction";
-import Orders from "./../components/profileComponents/Orders";
+import Orders from "../components/profileComponents/Orders";
 import moment from "moment";
 import { listMyOrders } from "../Redux/Actions/OrderActions";
 import { getOrderDetails } from "../Redux/Actions/OrderActions";
 import { Link } from "react-router-dom";
 
-const ProfileScreen = ({ history }) => {
+const OrderListScreen = ({ history }) => {
   window.scrollTo(0, 0);
 
   const dispatch = useDispatch();
@@ -24,11 +24,11 @@ const ProfileScreen = ({ history }) => {
 
   useEffect(() => {
     dispatch(listMyOrders());
-
+    //dispatch(getOrderDetails());
     dispatch(getUserDetails("profile"));
   }, [dispatch]);
   const orderListHandler = () => {
-    history.push("/order-list");
+    history.push("/Shop");
   };
   return (
     <>
@@ -64,37 +64,29 @@ const ProfileScreen = ({ history }) => {
                 >
                   {/* <Orders orders={orders} loading={loading} error={error} /> */}
                   {/* <button
-                    //class="nav-link active"
-                    // id="v-pills-home-tab"
-                    // data-bs-toggle="pill"
-                    // data-bs-target="#v-pills-home"
+                    class="nav-link active"
+                    id="v-pills-home-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#v-pills-home"
                     type="button"
-                    // role="tab"
-                    // aria-controls="v-pills-home"
-                    // aria-selected="true"
-                    onClick={orderListHandler}
+                    role="tab"
+                    aria-controls="v-pills-home"
+                    aria-selected="true"
                   >
                     Profile Settings
                   </button> */}
-
                   <button
                     class="nav-link active d-flex justify-content-center"
                     onClick={orderListHandler}
                     id="v-pills-profile-tab"
                   >
                     <li className="nav-item mb-2">
-                      <Link
-                        to="/order-list"
-                        className="btn btn-outline-danger me-2"
-                      >
-                        Order List
+                      <Link to="/Shop" className="btn btn-outline-danger me-2">
+                        Continue Shopping
                       </Link>
                     </li>
-
-                    <span className="badge2 ms-5">
-                      {orders ? orders.length : 0}
-                    </span>
                   </button>
+                  {/* <Orders orders={orders} loading={loading} error={error} /> */}
                 </div>
               </div>
             </div>
@@ -111,7 +103,8 @@ const ProfileScreen = ({ history }) => {
               role="tabpanel"
               aria-labelledby="v-pills-home-tab"
             >
-              <ProfileTabs />
+              <Orders orders={orders} loading={loading} error={error} />
+              {/* <ProfileTabs /> */}
             </div>
             <div
               class="tab-pane fade"
@@ -119,7 +112,7 @@ const ProfileScreen = ({ history }) => {
               role="tabpanel"
               aria-labelledby="v-pills-profile-tab"
             >
-              <Orders orders={orders} loading={loading} error={error} />
+              {/* <Orders orders={orders} loading={loading} error={error} /> */}
             </div>
           </div>
         </div>
@@ -128,4 +121,4 @@ const ProfileScreen = ({ history }) => {
   );
 };
 
-export default ProfileScreen;
+export default OrderListScreen;

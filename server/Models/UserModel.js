@@ -1,9 +1,17 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
-const userShema = mongoose.Schema(
+const userSchema = mongoose.Schema(
   {
-    name: {
+    firstname: {
+      require: true,
+      type: String,
+    },
+    lastname: {
+      require: true,
+      type: String,
+    },
+    pin: {
       type: String,
       require: true,
     },
@@ -28,12 +36,12 @@ const userShema = mongoose.Schema(
 );
 
 // login
-userShema.methods.matchPassword = async function (enterPassword) {
+userSchema.methods.matchPassword = async function (enterPassword) {
   return await bcrypt.compare(enterPassword, this.password);
 };
 
 // login
-userShema.pre("save", async function (next) {
+userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
@@ -41,6 +49,16 @@ userShema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-const User = mongoose.model("User", userShema);
+//Hash pin
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("pin")) {
+    next();
+  }
+  //hash pin
+  const salt = await bcrypt.genSalt(10);
+  this.pin = await bcrypt.hash(this.pin, salt);
+  next();
+});
+const User = mongoose.model("User", userSchema);
 
 export default User;

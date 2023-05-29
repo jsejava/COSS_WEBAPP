@@ -44,14 +44,63 @@ const PayScreen = ({ history, match }) => {
     <>
       <Header />
       <div className="container">
-        <button
-          className="round-black-btn"
-          // amount={order.totalPrice}
-          onClick={placeOrderHandler}
+        {/* <div className="row order-detail"> */}
+        <div
+          style={{
+            // display: "flex",
+            // height: "10px",
+            // width: "100%",
+            // justifyContent: "center",
+            // alignItems: "center",
+            // flexDirection: "column",
+            marginTop: "50px",
+          }}
+          className="row order-detail"
         >
-          comfirm order
+          {/* <div className="col-lg-8 col-sm-8 mb-lg-8 mb-5 mb-sm-0"> */}
+          {/* <div className="row "> */}
+          {/* <div className="col-md-8 center"></div> */}
+          <h1
+            style={{
+              display: "flex",
+              // height: "10px",
+              // width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              // marginTop: "40px",
+            }}
+          >
+            <i>
+              Thanks For Being With Us, Will Be At Your Door Step As Soon As
+              Possible
+            </i>
+          </h1>
+          {/* <div className="col-md-8 center"></div> */}
+          {/* </div> */}
+        </div>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          height: "10px",
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          marginTop: "40px",
+        }}
+      >
+        <button
+          onClick={placeOrderHandler}
+          type="button"
+          class="btn btn-primary btn-lg"
+        >
+          Submit Order
         </button>
       </div>
+      {/* </div> */}
     </>
   );
 };

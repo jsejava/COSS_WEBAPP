@@ -4,6 +4,8 @@ import moment from "moment";
 
 const Orders = (props) => {
   const { orders } = props;
+  //console.log(orders.user.firstname);
+  // console.log(orders);
   return (
     <table className="table">
       <thead>
@@ -20,10 +22,13 @@ const Orders = (props) => {
         </tr>
       </thead>
       <tbody>
+        {orders.map((order) => console.log(order?.user.firstname))}
         {orders.map((order) => (
           <tr key={order._id}>
             <td>
-              <b>{order.user.name}</b>
+              <b>
+                {order.user.firstname} {order.user.lastname}
+              </b>
             </td>
             <td>{order.user.email}</td>
             <td>${order.totalPrice}</td>

@@ -8,7 +8,9 @@ import Header from "./../components/Header";
 
 const Register = ({ location, history }) => {
   window.scrollTo(0, 0);
-  const [name, setName] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [pin, setPin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,7 +28,8 @@ const Register = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(register(name, email, password));
+    // console.log(firstname, lastname, pin, email, password);
+    dispatch(register(firstname, lastname, email, pin, password));
   };
 
   return (
@@ -35,18 +38,24 @@ const Register = ({ location, history }) => {
       <div className="container d-flex flex-column justify-content-center align-items-center login-center">
         {error && <Message variant="alert-danger">{error}</Message>}
         {loading && <Loading />}
-        <div>
+        {/* <div>
           <img alt="logo" src="/logo/s2.jpeg" />
-        </div>
+        </div> */}
         <form
           className="Login col-md-8 col-lg-4 col-11"
           onSubmit={submitHandler}
         >
           <input
             type="text"
-            placeholder="Username"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            placeholder="First Name"
+            value={firstname}
+            onChange={(e) => setFirstname(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            value={lastname}
+            onChange={(e) => setLastname(e.target.value)}
           />
           <input
             type="email"
@@ -59,6 +68,12 @@ const Register = ({ location, history }) => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Enter a Pin"
+            value={pin}
+            onChange={(e) => setPin(e.target.value)}
           />
           <button type="submit">Register</button>{" "}
           <p>

@@ -21,6 +21,7 @@ import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
 import ServiceScreen from "./screens/ServiceScreen";
 import SubScreen from "./screens/SubScreen";
+import OrderListScreen from "./screens/OrderListScreen";
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <PrivateRouter path="/profile" component={ProfileScreen} />
+        <PrivateRouter path="/order-list" component={OrderListScreen} />
         <Route path="/cart/:id?" component={CartScreen} />
         <Route path="/sub/:id?" component={SubScreen} />
         <PrivateRouter path="/shipping" component={ShippingScreen} />

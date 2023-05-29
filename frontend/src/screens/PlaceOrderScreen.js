@@ -22,8 +22,14 @@ const PlaceOrderScreen = ({ history }) => {
   cart.itemsPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   );
-  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100);
-  cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)));
+  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 3);
+  // cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)));
+  // cart.totalPrice = (
+  //   Number(cart.itemsPrice) +
+  //   Number(cart.shippingPrice) +
+  //   Number(cart.taxPrice)
+  // ).toFixed(2);
+  cart.taxPrice = addDecimals(Number((0 * cart.itemsPrice).toFixed(2)));
   cart.totalPrice = (
     Number(cart.itemsPrice) +
     Number(cart.shippingPrice) +
@@ -41,6 +47,9 @@ const PlaceOrderScreen = ({ history }) => {
       dispatch({ type: ORDER_CREATE_RESET });
     }
   }, [history, dispatch, success, order]);
+  const cancelOrderHandler = () => {
+    history.push("/shop");
+  };
 
   const placeOrderHandler = () => {
     dispatch(
@@ -72,7 +81,9 @@ const PlaceOrderScreen = ({ history }) => {
                 <h5>
                   <strong>Customer</strong>
                 </h5>
-                <p>{userInfo.name}</p>
+                <p>
+                  {userInfo.firstname} {userInfo.lastname}
+                </p>
                 <p>{userInfo.email}</p>
               </div>
             </div>
@@ -89,7 +100,9 @@ const PlaceOrderScreen = ({ history }) => {
                 <h5>
                   <strong>Order info</strong>
                 </h5>
-                <p>Name: {cart.shippingAddress.country}</p>
+                <p>
+                  Name: {userInfo.firstname} {userInfo.lastname}
+                </p>
                 <p>Pay method: {cart.paymentMethod}</p>
               </div>
             </div>
@@ -181,9 +194,11 @@ const PlaceOrderScreen = ({ history }) => {
                   PLACE ORDER
                 </button>
                 <br></br>
-                <Link to="/shop" className="btn btn-success me-2">
-                  CAMCEL ORDER
-                </Link>
+                {/* <Link to="/shop"> */}
+                <button type="submit" onClick={cancelOrderHandler}>
+                  CANCEL ORDER
+                </button>
+                {/* </Link> */}
               </>
             )}
             {error && (

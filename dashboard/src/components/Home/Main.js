@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 const Main = () => {
   const orderList = useSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
+  console.log("orders", orders);
   const productList = useSelector((state) => state.productList);
   const { products } = productList;
   return (

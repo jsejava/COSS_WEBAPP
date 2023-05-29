@@ -65,7 +65,9 @@ const PlaceOrderScreen = ({ history }) => {
                 <h5>
                   <strong>Customer</strong>
                 </h5>
-                <p>{userInfo.name}</p>
+                <p>
+                  {userInfo.firstname} {userInfo.lastname}
+                </p>
                 <p>{userInfo.email}</p>
               </div>
             </div>
@@ -82,8 +84,8 @@ const PlaceOrderScreen = ({ history }) => {
                 <h5>
                   <strong>Order info</strong>
                 </h5>
-                <p>Name: {cart.shippingAddress.country}</p>
-                <p>Pay method: {cart.paymentMethod}</p>
+                Name: {userInfo.firstname} {userInfo.lastname}
+                {/* <p>Pay method: {cart.paymentMethod}</p> */}
               </div>
             </div>
           </div>
@@ -109,78 +111,23 @@ const PlaceOrderScreen = ({ history }) => {
           </div>
         </div>
 
-        <div className="row order-products justify-content-between">
-          {/* <div className="col-lg-8">
-            {cart.cartItems.length === 0 ? (
-              <Message variant="alert-info mt-5">Your cart is empty</Message>
-            ) : (
-              <>
-                {cart.cartItems.map((item, index) => (
-                  <div className="order-product row" key={index}>
-                    <div className="col-md-3 col-6">
-                      <img src={item.image} alt={item.name} />
-                    </div>
-                    <div className="col-md-5 col-6 d-flex align-items-center">
-                      <Link to={`/products/${item.product}`}>
-                        <h6>{item.name}</h6>
-                      </Link>
-                    </div>
-                    <div className="mt-3 mt-md-0 col-md-2 col-6  d-flex align-items-center flex-column justify-content-center ">
-                      <h4>QUANTITY</h4>
-                      <h6>{item.qty}</h6>
-                    </div>
-                    <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
-                      <h4>SUBTOTAL</h4>
-                      <h6>Gh₵ {item.qty * item.price}</h6>
-                    </div>
-                  </div>
-                ))}
-              </>
-            )}
-          </div> */}
-          {/* total */}
-          {/* <div className="col-lg-3 d-flex align-items-end flex-column mt-5 subtotal-order">
-            <table className="table table-bordered">
-              <tbody>
-                <tr>
-                  <td>
-                    <strong>Products</strong>
-                  </td>
-                  <td>Gh₵ {cart.itemsPrice}</td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Delivery Fee</strong>
-                  </td>
-                  <td>Gh₵ {cart.shippingPrice}</td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Tax</strong>
-                  </td>
-                  <td>Gh₵ {cart.taxPrice}</td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Total</strong>
-                  </td>
-                  <td>Gh₵ {cart.totalPrice}</td>
-                </tr>
-              </tbody>
-            </table>
-            {cart.cartItems.length === 0 ? null : (
-              <button type="submit" onClick={placeOrderHandler}>
-                PLACE ORDER
-              </button>
-            )}
-            {error && (
-              <div className="my-3 col-12">
-                <Message variant="alert-danger">{error}</Message>
-              </div>
-            )} */}
-          {/* </div> */}
-          <button type="submit" onClick={placeOrderHandler}>
-            Confirm Delivery Address
+        <div
+          style={{
+            display: "flex",
+            height: "10px",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            marginTop: "40px",
+          }}
+        >
+          <button
+            onClick={placeOrderHandler}
+            type="button"
+            class="btn btn-primary btn-lg"
+          >
+            Confirm Order Info
           </button>
         </div>
       </div>

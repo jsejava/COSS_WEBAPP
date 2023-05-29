@@ -69,7 +69,7 @@ productRoute.post(
         throw new Error("Product already Reviewed");
       }
       const review = {
-        name: req.user.name,
+        name: req.user.firstname,
         rating: Number(rating),
         comment,
         user: req.user._id,

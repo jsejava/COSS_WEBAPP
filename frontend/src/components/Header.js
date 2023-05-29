@@ -14,6 +14,7 @@ const Header = () => {
   const { cartItems } = cart;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  //console.log("now", userInfo);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -86,6 +87,9 @@ const Header = () => {
                       <div className="dropdown-menu">
                         <Link className="dropdown-item" to="/profile">
                           Profile
+                        </Link>
+                        <Link className="dropdown-item" to="/order-list">
+                          Order
                         </Link>
 
                         <Link
@@ -175,11 +179,14 @@ const Header = () => {
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
-                      Hi, {userInfo.name}
+                      Hi, {userInfo.firstname}
                     </button>
                     <div className="dropdown-menu">
                       <Link className="dropdown-item" to="/profile">
                         Profile
+                      </Link>
+                      <Link className="dropdown-item" to="/order-list">
+                        Order
                       </Link>
 
                       <Link

@@ -7,7 +7,9 @@ import { toast } from "react-toastify";
 import { updateUserProfile } from "../../Redux/Actions/userAction";
 
 const ProfileTabs = () => {
-  const [name, setName] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [pin, setPin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -30,8 +32,11 @@ const ProfileTabs = () => {
 
   useEffect(() => {
     if (user) {
-      setName(user.name);
+      setFirstname(user.firstname);
+      setLastname(user.lastname);
+      // setPin(user.pin);
       setEmail(user.email);
+      //console.log(user);
     }
   }, [dispatch, user]);
 
@@ -43,7 +48,16 @@ const ProfileTabs = () => {
         toastId.current = toast.error("Password does not match", Toastobjects);
       }
     } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }));
+      dispatch(
+        updateUserProfile({
+          id: user._id,
+          firstname,
+          lastname,
+          pin,
+          email,
+          password,
+        })
+      );
       if (!toast.isActive(toastId.current)) {
         toastId.current = toast.success("Profile Updated", Toastobjects);
       }
@@ -59,13 +73,25 @@ const ProfileTabs = () => {
       <form className="row  form-container" onSubmit={submitHandler}>
         <div className="col-md-6">
           <div className="form">
-            <label for="account-fn">UserName</label>
+            <label for="account-fn">FirstName</label>
             <input
               className="form-control"
               type="text"
               required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={firstname}
+              onChange={(e) => setFirstname(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="form">
+            <label for="account-fn">LastName</label>
+            <input
+              className="form-control"
+              type="text"
+              required
+              value={lastname}
+              onChange={(e) => setLastname(e.target.value)}
             />
           </div>
         </div>
@@ -84,12 +110,25 @@ const ProfileTabs = () => {
         </div>
         <div className="col-md-6">
           <div className="form">
+            <label for="account-fn">PIN</label>
+            <input
+              className="form-control"
+              type="text"
+              value={pin}
+              onChange={(e) => setPin(e.target.value)}
+              placeholder="*   *   *   *"
+            />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="form">
             <label for="account-pass">New Password</label>
             <input
               className="form-control"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="*   *   *   *"
             />
           </div>
         </div>
@@ -101,6 +140,7 @@ const ProfileTabs = () => {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="*   *   *   *"
             />
           </div>
         </div>

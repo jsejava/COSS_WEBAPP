@@ -30,7 +30,8 @@ const SingleProduct = ({ history, match }) => {
     error: errorCreateReview,
     success: successCreateReview,
   } = productReviewCreate;
-
+  console.log(successCreateReview);
+  // console.log(userInfo);
   useEffect(() => {
     if (successCreateReview) {
       alert("Review Submitted");
