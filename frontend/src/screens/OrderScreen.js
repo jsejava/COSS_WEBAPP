@@ -268,7 +268,7 @@ const OrderScreen = ({ history, match }) => {
                   {!order.isPaid && (
                     <div className="col-12">
                       {
-                        <a href="http://localhost:4000/add-expense">
+                        <a href="http://localhost:3000/add-expense">
                           <button
                             id="myBtn"
                             className="round-black-btn mb-4"
