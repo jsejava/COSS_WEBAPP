@@ -81,6 +81,12 @@ const HomeSection = (props) => {
                     </div>
                   </div>
                 </div>
+                {/* 
+                <div className="channel-list__sidebar__icon1">
+                  <a className="icon1__inner" href="http://localhost:3000/">
+                    <img alt="logo" src="/logo/ca1.jpg" width="41" />;
+                  </a>
+                </div> */}
               </div>
             </div>
           </div>
