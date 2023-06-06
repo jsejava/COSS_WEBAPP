@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { PayPalButton } from "react-paypal-button-v2";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrderDetails, payOrder } from "../Redux/Actions/OrderActions";
+import { payOrder } from "../Redux/Actions/OrderActions";
 import Loading from "../components/LoadingError/Loading";
 import Message from "../components/LoadingError/Error";
 import moment from "moment";
@@ -13,71 +13,88 @@ import { ORDER_PAY_RESET } from "../Redux/Constants/OrderConstants";
 const PayScreen = ({ history, match }) => {
   window.scrollTo(0, 0);
 
-  const orderId = match.params.id;
-  // console.log("ok", match.params);
-  // const paymentResult = {
-  //   id: orderId,
-  //   //   // status: req.body.status,
-  //   //   // update_time: req.body.update_time,
-  //   //   // email_address: req.body.email_address,
-  // };
+  let userid = document.cookie
+    .split(";")
+    .find((row) => row.startsWith("userid="))
+    ?.split("=")[1];
+
+  const useremail = document.cookie
+    .split(" ")
+    .find((row) => row.startsWith("useremail="))
+    ?.split("=")[1];
+
+  console.log("userid", userid, "useremail", useremail);
+
+  const paymentResult = {
+    id: userid,
+    update_time: Date.now(),
+    email_address: useremail,
+  };
+  // console.log("paymentResult", paymentResult);
+
   const dispatch = useDispatch();
 
-  const orderDetails = useSelector((state) => state.orderDetails);
-  const { order, loading, error } = orderDetails;
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
+  console.log("successPay", successPay);
+  const orderId = localStorage.getItem("orderId");
+  console.log("orderId", orderId);
+
+  //ispatch(payRequest(requestId, paymentResult));
+
+  // useEffect(() => {
+
+  //   dispatch(payRequest(requestId, paymentResult));
+  //   dispatch(getRequestDetails(requestId));
+  // }, [dispatch]);
 
   useEffect(() => {
-    if (!order || successPay) {
-      dispatch({ type: ORDER_PAY_RESET });
-      dispatch(getOrderDetails(orderId));
-    }
-  }, [dispatch, orderId, successPay, order]);
+    if (orderId) {
+      dispatch(payOrder(orderId, paymentResult));
 
-  const placeOrderHandler = () => {
-    dispatch(payOrder(orderId));
-    history.push(`/shop`);
+      localStorage.removeItem("orderId");
+      document.cookie = `userid=; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;path=/pay`;
+      document.cookie = `useremail= expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;path=/pay`;
+    }
+  }, []);
+
+  console.log(localStorage.getItem("orderId"));
+  const detailsHandler = () => {
+    history.push("/shop");
   };
+
+  // const detailsHandler = () => {
+  //   dispatch(getRequestDetails(requestId));
+  //   console.log("order", order);
+  // };
+  // useEffect(() => {
+  //   if (successPay) {
+  //     dispatch(getRequestDetails(requestId));
+  //   }
+  // }, [successPay]);
+  // console.log("order", order);
 
   return (
     <>
       <Header />
       <div className="container">
-        {/* <div className="row order-detail"> */}
         <div
           style={{
-            // display: "flex",
-            // height: "10px",
-            // width: "100%",
-            // justifyContent: "center",
-            // alignItems: "center",
-            // flexDirection: "column",
             marginTop: "50px",
           }}
           className="row order-detail"
         >
-          {/* <div className="col-lg-8 col-sm-8 mb-lg-8 mb-5 mb-sm-0"> */}
-          {/* <div className="row "> */}
-          {/* <div className="col-md-8 center"></div> */}
           <h1
             style={{
               display: "flex",
-              // height: "10px",
-              // width: "100%",
+
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
-              // marginTop: "40px",
             }}
           >
-            <i>
-              Thanks For Being With Us, Will Be At Your Door Step As Soon As
-              Possible
-            </i>
+            <img alt="logo" src="/logo/paySuc1.jpeg" width={300} height={300} />
           </h1>
-          {/* <div className="col-md-8 center"></div> */}
-          {/* </div> */}
         </div>
       </div>
 
@@ -93,11 +110,11 @@ const PayScreen = ({ history, match }) => {
         }}
       >
         <button
-          onClick={placeOrderHandler}
+          onClick={detailsHandler}
           type="button"
           class="btn btn-primary btn-lg"
         >
-          Submit Order
+          Continue Shopping
         </button>
       </div>
       {/* </div> */}

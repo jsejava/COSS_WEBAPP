@@ -12,6 +12,7 @@ import {
   serviceListReducer,
 } from "../Redux/Reducers/ServiceReducer";
 import { cartReducer } from "./Reducers/CartReducers";
+import { reqCartReducer } from "./Reducers/reqCartReducer";
 import {
   userDetailsReducer,
   userLoginReducer,
@@ -24,6 +25,12 @@ import {
   orderListMyReducer,
   orderPayReducer,
 } from "./Reducers/OrderReducres";
+import {
+  requestCreateReducer,
+  requestDetailsReducer,
+  requestListMyReducer,
+  requestPayReducer,
+} from "./Reducers/RequestReducers";
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -35,6 +42,7 @@ const reducer = combineReducers({
   serviceReviewCreate: serviceCreateReviewReducer,
 
   cart: cartReducer,
+  reqCart: reqCartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
@@ -43,11 +51,22 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
   orderListMy: orderListMyReducer,
+
+  requestCreate: requestCreateReducer,
+  requestDetails: requestDetailsReducer,
+  requestPay: requestPayReducer,
+  requestListMy: requestListMyReducer,
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem("cartItems")
   ? JSON.parse(localStorage.getItem("cartItems"))
   : [];
+
+const reqCartItemsFromLocalStorage = localStorage.getItem("reqCartItems")
+  ? JSON.parse(localStorage.getItem("reqCartItems"))
+  : [];
+
+//const reqCartItemsFromLocalStorage = [];
 
 // login
 const userInfoFromLocalStorage = localStorage.getItem("userInfo")
@@ -59,11 +78,22 @@ const shippingAddressFromLocalStorage = localStorage.getItem("shippingAddress")
   ? JSON.parse(localStorage.getItem("shippingAddress"))
   : {};
 
+const reqShippingAddressFromLocalStorage = localStorage.getItem(
+  "reqShippingAddress"
+)
+  ? JSON.parse(localStorage.getItem("shippingAddress"))
+  : {};
+
 const initialState = {
   cart: {
     cartItems: cartItemsFromLocalStorage,
     shippingAddress: shippingAddressFromLocalStorage,
   },
+  reqCart: {
+    reqCartItems: reqCartItemsFromLocalStorage,
+    reqShippingAddress: reqShippingAddressFromLocalStorage,
+  },
+
   userLogin: { userInfo: userInfoFromLocalStorage },
 };
 

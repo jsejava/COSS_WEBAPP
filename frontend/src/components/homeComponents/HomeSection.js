@@ -64,7 +64,7 @@ const HomeSection = (props) => {
                 <div className="shop col-lg-4 col-md-6 col-sm-6">
                   <div className="border-welcome">
                     {/* <Link to="http://localhost:3000/"> */}
-                    <a href="http://localhost:3000/">
+                    <a href="http://localhost:4000/">
                       <div className="welcomeBack">
                         <img
                           src="https://cdn.pixabay.com/photo/2019/06/20/17/59/online-banking-4287719_1280.jpg"

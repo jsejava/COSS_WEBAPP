@@ -10,10 +10,22 @@ import {
   productUpdateReducer,
 } from "./Reducers/ProductReducers";
 import {
+  serviceCreateReducer,
+  serviceDeleteReducer,
+  serviceEditReducer,
+  serviceListReducer,
+  serviceUpdateReducer,
+} from "./Reducers/ServiceReducers";
+import {
   orderDeliveredReducer,
   orderDetailsReducer,
   orderListReducer,
 } from "./Reducers/OrderReducres";
+import {
+  requestDeliveredReducer,
+  requestDetailsReducer,
+  requestListReducer,
+} from "./Reducers/RequestReducres";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -23,9 +35,17 @@ const reducer = combineReducers({
   productCreate: productCreateReducer,
   productEdit: productEditReducer,
   productUpdate: productUpdateReducer,
+  serviceList: serviceListReducer,
+  serviceDelete: serviceDeleteReducer,
+  serviceCreate: serviceCreateReducer,
+  serviceEdit: serviceEditReducer,
+  serviceUpdate: serviceUpdateReducer,
   orderList: orderListReducer,
   orderDetails: orderDetailsReducer,
   orderDeliver: orderDeliveredReducer,
+  requestList: requestListReducer,
+  requestDetails: requestDetailsReducer,
+  requestDeliver: requestDeliveredReducer,
 });
 
 // login

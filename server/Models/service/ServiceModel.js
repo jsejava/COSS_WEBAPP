@@ -50,6 +50,15 @@ const serviceSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    availability: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
+    provider: {
+      type: String,
+      default: "Campus Service",
+    },
   },
   {
     timestamps: true,

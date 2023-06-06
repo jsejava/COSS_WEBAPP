@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SHeader from "../components/SHeader";
+import Header from "../components/Header";
 import Rating from "../components/homeComponents/Rating";
 import { Link } from "react-router-dom";
 import Message from "../components/LoadingError/Error";
@@ -13,15 +13,18 @@ import { SERVICE_CREATE_REVIEW_RESET } from "../Redux/Constants/ServiceConstants
 import moment from "moment";
 
 const SingleService = ({ history, match }) => {
-  const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState(10);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+
+  // console.log(qty);
 
   const serviceId = match.params.id;
   const dispatch = useDispatch();
 
   const serviceDetails = useSelector((state) => state.serviceDetails);
   const { loading, error, service } = serviceDetails;
+  console.log(service);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const serviceReviewCreate = useSelector((state) => state.serviceReviewCreate);
@@ -43,11 +46,9 @@ const SingleService = ({ history, match }) => {
 
   const AddToCartHandle = (e) => {
     e.preventDefault();
-    history.push(`/sub/${serviceId}?qty=${qty}`);
+    history.push(`/service/req-cart/${serviceId}?qty=${qty}`);
   };
-  const checkOutHandler = () => {
-    history.push("/login?redirect=shipping");
-  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
@@ -59,7 +60,8 @@ const SingleService = ({ history, match }) => {
   };
   return (
     <>
-      <SHeader />
+      {/* <SHeader /> */}
+      <Header />
       <div className="container single-product">
         {loading ? (
           <Loading />
@@ -83,12 +85,16 @@ const SingleService = ({ history, match }) => {
 
                   <div className="product-count col-lg-7 ">
                     <div className="flex-box d-flex justify-content-between align-items-center">
-                      <h6>Price</h6>
+                      <h6>Service</h6>
                       <span> Gh₵ {service.price}</span>
                     </div>
                     <div className="flex-box d-flex justify-content-between align-items-center">
+                      <h6>Provider</h6>
+                      <span> {service.provider}</span>
+                    </div>
+                    <div className="flex-box d-flex justify-content-between align-items-center">
                       <h6>Status</h6>
-                      {service.countInStock > 0 ? (
+                      {service.availability == true ? (
                         <span>Available</span>
                       ) : (
                         <span>unavailable</span>
@@ -101,28 +107,28 @@ const SingleService = ({ history, match }) => {
                         text={`${service.numReviews} reviews`}
                       />
                     </div>
-                    {service.countInStock > 0 ? (
+                    {service.availability == true ? (
                       <>
                         <div className="flex-box d-flex justify-content-between align-items-center">
-                          <h6>In</h6>
+                          <h6>Amount</h6>
                           <select
                             value={qty}
                             onChange={(e) => setQty(e.target.value)}
                           >
                             {[...Array(service.countInStock).keys()].map(
                               (x) => (
-                                <option key={x + 1} value={x + 1}>
-                                  {x + 1} hours
+                                <option key={x + 1} value={(x + 1) * 1}>
+                                  {(x + 1) * 1} GH¢
                                 </option>
                               )
                             )}
                           </select>
                         </div>
                         <button
-                          onClick={checkOutHandler}
+                          onClick={AddToCartHandle}
                           className="round-black-btn"
                         >
-                          Request Service
+                          Add To Request Cart
                         </button>
                       </>
                     ) : null}

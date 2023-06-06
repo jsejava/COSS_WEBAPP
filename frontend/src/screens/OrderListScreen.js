@@ -28,7 +28,7 @@ const OrderListScreen = ({ history }) => {
     dispatch(getUserDetails("profile"));
   }, [dispatch]);
   const orderListHandler = () => {
-    history.push("/Shop");
+    history.push("/shop");
   };
   return (
     <>
@@ -81,7 +81,7 @@ const OrderListScreen = ({ history }) => {
                     id="v-pills-profile-tab"
                   >
                     <li className="nav-item mb-2">
-                      <Link to="/Shop" className="btn btn-outline-danger me-2">
+                      <Link to="/shop" className="btn btn-outline-danger me-2">
                         Continue Shopping
                       </Link>
                     </li>

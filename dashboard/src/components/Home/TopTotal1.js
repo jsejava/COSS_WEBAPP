@@ -1,6 +1,6 @@
 import React from "react";
 
-const TopTotal = (props) => {
+const TopTotal1 = (props) => {
   const { orders, products } = props;
   let totalSale = 0;
   if (orders) {
@@ -53,4 +53,4 @@ const TopTotal = (props) => {
   );
 };
 
-export default TopTotal;
+export default TopTotal1;

@@ -28,16 +28,16 @@ serviceRoute.get(
   })
 );
 
-// ADMIN GET ALL SERVICES WITHOUT SEARCH AND PEGINATION
-// serviceRoute.get(
-//   "/all",
-//   protect,
-//   admin,
-//   asyncHandler(async (req, res) => {
-//     const products = await Product.find({}).sort({ _id: -1 });
-//     res.json(products);
-//   })
-// );
+//ADMIN GET ALL SERVICES WITHOUT SEARCH AND PEGINATION
+serviceRoute.get(
+  "/all",
+  protect,
+  admin,
+  asyncHandler(async (req, res) => {
+    const services = await Service.find({}).sort({ _id: -1 });
+    res.json(services);
+  })
+);
 
 // GET SINGLE SERVICES
 serviceRoute.get(
@@ -116,7 +116,8 @@ serviceRoute.post(
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const { name, image, description, price, countInStock } = req.body;
+    const { name, image, description, price, availability, countInStock } =
+      req.body;
     const serviceExist = await Service.findOne({ name });
     if (serviceExist) {
       res.status(400);
@@ -127,7 +128,9 @@ serviceRoute.post(
         price,
         description,
         image,
+        availability,
         countInStock,
+        availability,
         user: req.user._id,
       });
       if (service) {
@@ -147,7 +150,8 @@ serviceRoute.put(
   protect,
   admin,
   asyncHandler(async (req, res) => {
-    const { name, price, description, image, countInStock } = req.body;
+    const { name, image, description, price, countInStock, availability } =
+      req.body;
     const service = await Service.findById(req.params.id);
     if (service) {
       service.name = name || service.name;
@@ -155,9 +159,11 @@ serviceRoute.put(
       service.description = description || service.description;
       service.image = image || service.image;
       service.countInStock = countInStock || service.countInStock;
+      service.availability = availability || service.availability;
 
       const updatedService = await service.save();
       res.json(updatedService);
+      console.log("UPDATE");
     } else {
       res.status(404);
       throw new Error("Service not found");

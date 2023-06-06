@@ -6,6 +6,7 @@ import { getUserDetails } from "../Redux/Actions/userAction";
 import Orders from "./../components/profileComponents/Orders";
 import moment from "moment";
 import { listMyOrders } from "../Redux/Actions/OrderActions";
+import { listMyRequest } from "../Redux/Actions/RequestActions";
 import { getOrderDetails } from "../Redux/Actions/OrderActions";
 import { Link } from "react-router-dom";
 
@@ -17,13 +18,18 @@ const ProfileScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const orderListMy = useSelector((state) => state.orderListMy);
-
   const { loading, error, orders } = orderListMy;
+  //console.log("orders", orders?.length);
+
+  const requestListMy = useSelector((state) => state.requestListMy);
+
+  const { orders: requests } = requestListMy;
 
   console.log("orders", orders?.length);
 
   useEffect(() => {
     dispatch(listMyOrders());
+    dispatch(listMyRequest());
 
     dispatch(getUserDetails("profile"));
   }, [dispatch]);
@@ -57,43 +63,63 @@ const ProfileScreen = ({ history }) => {
             <div className="wizard pt-3 ">
               <div class="d-flex align-items-start">
                 <div
-                  class="nav align-items-start flex-column col-12 nav-pills me-3 "
-                  id="v-pills-tab"
-                  role="tablist"
-                  aria-orientation="vertical"
+                  class="nav align-items-start"
+                  // id="v-pills-tab"
+                  // role="tablist"
+                  //aria-orientation="vertical"
+                  //class="nav align-items-start flex-column"
+                  //id="v-pills-tab"
+                  //role="tablist"
+                  //aria-orientation="vertical"
                 >
                   {/* <Orders orders={orders} loading={loading} error={error} /> */}
-                  {/* <button
-                    //class="nav-link active"
-                    // id="v-pills-home-tab"
-                    // data-bs-toggle="pill"
-                    // data-bs-target="#v-pills-home"
-                    type="button"
-                    // role="tab"
-                    // aria-controls="v-pills-home"
-                    // aria-selected="true"
-                    onClick={orderListHandler}
-                  >
-                    Profile Settings
-                  </button> */}
 
                   <button
                     class="nav-link active d-flex justify-content-center"
-                    onClick={orderListHandler}
-                    id="v-pills-profile-tab"
+                    // onClick={orderListHandler}
                   >
                     <li className="nav-item mb-2">
                       <Link
                         to="/order-list"
-                        className="btn btn-outline-danger me-2"
+                        className="btn btn-outline-danger me-3"
                       >
                         Order List
                       </Link>
                     </li>
 
-                    <span className="badge2 ms-5">
+                    <span className="badge2  me-5">
                       {orders ? orders.length : 0}
                     </span>
+
+                    <li className="nav-item mb-2">
+                      <Link
+                        to="/service/request-list"
+                        className="btn btn-outline-danger me-3"
+                      >
+                        Request List
+                      </Link>
+                    </li>
+
+                    <span className="badge2">
+                      {requests ? requests.length : 0}
+                    </span>
+                  </button>
+
+                  <button class="nav-link active d-flex justify-content-center">
+                    <li className="nav-item mb-2">
+                      <Link to="/shop" className="btn btn-outline-success me-5">
+                        Campus Shop
+                      </Link>
+                    </li>
+
+                    <li className="nav-item mb-2">
+                      <Link
+                        to="/service"
+                        className="btn btn-outline-success ms-5"
+                      >
+                        Campus Service
+                      </Link>
+                    </li>
                   </button>
                 </div>
               </div>
@@ -119,7 +145,7 @@ const ProfileScreen = ({ history }) => {
               role="tabpanel"
               aria-labelledby="v-pills-profile-tab"
             >
-              <Orders orders={orders} loading={loading} error={error} />
+              {/* <Orders orders={orders} loading={loading} error={error} /> */}
             </div>
           </div>
         </div>

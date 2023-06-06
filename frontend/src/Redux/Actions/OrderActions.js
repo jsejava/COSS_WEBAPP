@@ -114,6 +114,7 @@ export const payOrder =
         paymentResult,
         config
       );
+      console.log("ORDER UPDATED REDUX", data);
       dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
     } catch (error) {
       const message =

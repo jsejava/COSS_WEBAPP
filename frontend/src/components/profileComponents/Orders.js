@@ -20,7 +20,7 @@ const Orders = (props) => {
               No Orders
               <Link
                 className="btn btn-success mx-2 px-3 py-2"
-                to="/"
+                to="/shop"
                 style={{
                   fontSize: "12px",
                 }}
@@ -44,7 +44,7 @@ const Orders = (props) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {orders.map((order) => (
+                    {orders?.map((order) => (
                       <tr
                         className={`${
                           order.isPaid ? "alert-success" : "alert-danger"

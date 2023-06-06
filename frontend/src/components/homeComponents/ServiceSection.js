@@ -38,7 +38,7 @@ const ServiceSection = (props) => {
                         key={service._id}
                       >
                         <div className="border-product">
-                          <Link to={`/services/${service._id}`}>
+                          <Link to={`/service/services/${service._id}`}>
                             <div className="shopBack">
                               <img src={service.image} alt={service.name} />
                             </div>
@@ -46,7 +46,7 @@ const ServiceSection = (props) => {
 
                           <div className="shoptext">
                             <p>
-                              <Link to={`/services/${service._id}`}>
+                              <Link to={`/service/services/${service._id}`}>
                                 {service.name}
                               </Link>
                             </p>
@@ -54,9 +54,17 @@ const ServiceSection = (props) => {
                               value={service.rating}
                               text={`${service.numReviews} reviews`}
                             />
-
+                            {/* 
                             <div>
                               {service.countInStock > 0 ? (
+                                <span>Available</span>
+                              ) : (
+                                <span>unavailable</span>
+                              )}
+                            </div> */}
+
+                            <div>
+                              {service.availability == true ? (
                                 <span>Available</span>
                               ) : (
                                 <span>unavailable</span>

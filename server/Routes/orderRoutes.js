@@ -18,6 +18,9 @@ orderRouter.post(
       taxPrice,
       shippingPrice,
       totalPrice,
+      //type,
+      isPaid,
+      isDelivered,
     } = req.body;
 
     if (orderItems && orderItems.length === 0) {
@@ -34,6 +37,9 @@ orderRouter.post(
         taxPrice,
         shippingPrice,
         totalPrice,
+        //type,
+        isPaid,
+        isDelivered,
       });
 
       const createOrder = await order.save();
@@ -89,6 +95,7 @@ orderRouter.put(
   "/:id/pay",
   protect,
   asyncHandler(async (req, res) => {
+    // console.log(req.body);
     const order = await Order.findById(req.params.id);
 
     if (order) {
@@ -96,13 +103,13 @@ orderRouter.put(
       order.paidAt = Date.now();
       order.paymentResult = {
         id: req.body.id,
-        status: req.body.status,
         update_time: req.body.update_time,
         email_address: req.body.email_address,
       };
 
       const updatedOrder = await order.save();
       res.json(updatedOrder);
+      console.log("ORDER UPDATED BACKEND");
     } else {
       res.status(404);
       throw new Error("Order Not Found");

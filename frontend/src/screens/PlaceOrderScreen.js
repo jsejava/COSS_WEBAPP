@@ -39,10 +39,11 @@ const PlaceOrderScreen = ({ history }) => {
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
 
+  //console.log(order);
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`);
-      localStorage.setItem("orderId", order._id);
+      // localStorage.setItem("orderId", order._id);
 
       dispatch({ type: ORDER_CREATE_RESET });
     }

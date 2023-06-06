@@ -31,9 +31,12 @@ const orderSchema = mongoose.Schema(
       required: true,
       default: "Paypal",
     },
+    type: {
+      type: String,
+      default: "order",
+    },
     paymentResult: {
       id: { type: String },
-      status: { type: String },
       update_time: { type: String },
       email_address: { type: String },
     },

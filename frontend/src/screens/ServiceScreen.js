@@ -1,5 +1,6 @@
 import React from "react";
-import SHeader from "../components/SHeader";
+//import SHeader from "../components/SHeader";
+import Header from "../components/Header";
 import ServiceSection from "../components/homeComponents/ServiceSection";
 import ContactInfo from "../components/homeComponents/ContactInfo";
 import CalltoActionSection from "../components/homeComponents/CalltoActionSection";
@@ -11,8 +12,8 @@ const ServiceScreen = ({ match }) => {
   const pagenumber = match.params.pagenumber;
   return (
     <div>
-      <SHeader />
-
+      <Header />
+      {/* <SHeader /> */}
       <ServiceSection keyword={keyword} pagenumber={pagenumber} />
       <CalltoActionSection />
       <ContactInfo />

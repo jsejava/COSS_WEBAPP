@@ -35,6 +35,16 @@ const Sidebar = () => {
                 <span className="text">Dashboard</span>
               </NavLink>
             </li>
+            {/* <li className="menu-item">
+              <NavLink
+                activeClassName="active"
+                className="menu-link"
+                to="/statistics"
+              >
+                <i className="icon fas fa-shopping-bag"></i>
+                <span className="text">Statistics</span>
+              </NavLink>
+            </li> */}
             <li className="menu-item">
               <NavLink
                 activeClassName="active"
@@ -49,10 +59,30 @@ const Sidebar = () => {
               <NavLink
                 activeClassName="active"
                 className="menu-link"
+                to="/services"
+              >
+                <i className="icon fas fa-toolbox"></i>
+                <span className="text">Services</span>
+              </NavLink>
+            </li>
+            <li className="menu-item">
+              <NavLink
+                activeClassName="active"
+                className="menu-link"
                 to="/addproduct"
               >
                 <i className="icon fas fa-cart-plus"></i>
                 <span className="text">Add product</span>
+              </NavLink>
+            </li>
+            <li className="menu-item">
+              <NavLink
+                activeClassName="active"
+                className="menu-link"
+                to="/addservice"
+              >
+                <i className="icon fas fa-truck-pickup"></i>
+                <span className="text">Add service</span>
               </NavLink>
             </li>
             {/* <li className="menu-item">
@@ -73,6 +103,16 @@ const Sidebar = () => {
               >
                 <i className="icon fas fa-bags-shopping"></i>
                 <span className="text">Orders</span>
+              </NavLink>
+            </li>
+            <li className="menu-item">
+              <NavLink
+                activeClassName="active"
+                className="menu-link"
+                to="/requests"
+              >
+                <i className="icon fas fa-dolly"></i>
+                <span className="text">Requests</span>
               </NavLink>
             </li>
             <li className="menu-item">
@@ -103,8 +143,8 @@ const Sidebar = () => {
                 className="menu-link"
                 href="http://localhost:4000/dashboard"
               >
-                <i className="icon fas fa-usd-circle"></i>
-                <span className="text">Transactions</span>
+                <i className="icon fas fa-ruble-sign"></i>
+                <span className="text">CampusPay</span>
               </a>
             </li>
           </ul>

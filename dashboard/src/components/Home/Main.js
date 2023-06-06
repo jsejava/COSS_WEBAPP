@@ -1,16 +1,27 @@
 import React from "react";
-import TopTotal from "./TopTotal";
+import TopTotal1 from "./TopTotal1";
+import TopTotal2 from "./TopTotal2";
 import LatestOrder from "./LatestOrder";
 import SaleStatistics from "./SalesStatistics";
-import ProductsStatistics from "./ProductsStatistics";
+
 import { useSelector } from "react-redux";
+import LatestRequest from "./LatestRequest";
+import ServicesStatistics from "./ServicesStatistics";
 
 const Main = () => {
   const orderList = useSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
-  console.log("orders", orders);
+  // console.log(orders);
+  const requestList = useSelector((state) => state.requestList);
+  const { loading_, error_, requests } = requestList;
+  //console.log(requests);
+  // console.log(requestList);
+
   const productList = useSelector((state) => state.productList);
   const { products } = productList;
+  const serviceList = useSelector((state) => state.serviceList);
+  const { services } = serviceList;
+  //console.log(services);
   return (
     <>
       <section className="content-main">
@@ -18,17 +29,41 @@ const Main = () => {
           <h2 className="content-title"> Dashboard </h2>
         </div>
         {/* Top Total */}
-        <TopTotal orders={orders} products={products} />
+        <div className="row">
+          <TopTotal1
+            orders={orders}
+            products={products}
+            requests={requests}
+            services={services}
+          />
+        </div>
 
         <div className="row">
           {/* STATICS */}
           <SaleStatistics />
-          <ProductsStatistics />
+          {/* <ProductsStatistics /> */}
+          <ServicesStatistics />
+
+          <TopTotal2
+            orders={orders}
+            products={products}
+            requests={requests}
+            services={services}
+          />
         </div>
 
         {/* LATEST ORDER */}
-        <div className="card mb-4 shadow-sm">
-          <LatestOrder orders={orders} loading={loading} error={error} />
+        <div className="row">
+          <div className="card mb-4 shadow-sm">
+            <LatestOrder orders={orders} loading={loading} error={error} />
+          </div>
+          <div className="card mb-4 shadow-sm">
+            <LatestRequest
+              orders={requests}
+              loading={loading_}
+              error={error_}
+            />
+          </div>
         </div>
       </section>
     </>

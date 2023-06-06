@@ -22,7 +22,7 @@ const OrderScreen = ({ history, match }) => {
   const { loading: loadingPay, success: successPay } = orderPay;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  console.log(order);
+  //console.log(order);
   if (!loading) {
     const addDecimals = (num) => {
       return (Math.round(num * 100) / 100).toFixed(2);
@@ -44,25 +44,13 @@ const OrderScreen = ({ history, match }) => {
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
   };
-
-  // const cookieHander = () => {
-  //   //console.log(order.totalPrice);
-
-  //   //document.cookie = "test2=World; SameSite=None; Secure";
-  //   document.cookie = `test2=${order.totalPrice}; SameSite=None; Secure`;
-  // };
-  // const show = () => {
-  //   showCookieValue();
-  // };
-
-  // const cookieValue = document.cookie
-  //   .split("; ")
-  //   .find((row) => row.startsWith("total="))
-  //   ?.split("=")[1];
-
-  // function showCookieValue() {
-  //   console.log(cookieValue);
-  // }
+  if (order) {
+    const { _id } = order;
+    console.log(_id);
+    localStorage.setItem("orderId", _id);
+    const x = localStorage.getItem("orderId");
+    console.log("local", x);
+  }
 
   function doOnce() {
     const total = order.totalPrice;
@@ -227,7 +215,7 @@ const OrderScreen = ({ history, match }) => {
                           </div>
                           <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
                             <h4>SUBTOTAL</h4>
-                            <h6>${item.qty * item.price}</h6>
+                            <h6>Gh₵ {item.qty * item.price}</h6>
                           </div>
                         </div>
                       ))}
@@ -268,7 +256,7 @@ const OrderScreen = ({ history, match }) => {
                   {!order.isPaid && (
                     <div className="col-12">
                       {
-                        <a href="http://localhost:3000/add-expense">
+                        <a href="http://localhost:4000/add-expense">
                           <button
                             id="myBtn"
                             className="round-black-btn mb-4"
@@ -302,24 +290,3 @@ const OrderScreen = ({ history, match }) => {
 };
 
 export default OrderScreen;
-
-// <div
-//   style={{
-//     display: "flex",
-//     height: "10px",
-//     width: "100%",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     flexDirection: "column",
-//     marginTop: "40px",
-//   }}
-// >
-//   <button
-//     // onClick={() => dispatch(logoutAction())}
-//onClick={placeOrderHandler}
-//     type="button"
-//     class="btn btn-primary btn-lg"
-//   >
-//     Confirm Order Info
-//   </button>
-// </div>;

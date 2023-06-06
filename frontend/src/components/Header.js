@@ -10,8 +10,36 @@ const Header = () => {
   const dispatch = useDispatch();
   let history = useHistory();
 
+  const { host, hostname, href, origin, pathname, port, protocol, search } =
+    window.location;
+  //console.log(pathname);
+  const myArray = pathname.split("/");
+  let x = myArray[1];
+  let y = "service";
+  let service;
+  //console.log(x);
+  if (x == y) {
+    //console.log("okay");
+    service = y;
+  } else {
+    service = undefined;
+  }
+  //console.log(host);
+  // console.log(hostname);
+  // console.log(href);
+  // console.log(origin);
+  // console.log(port);
+  // console.log(protocol);
+  // console.log(search);
+
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  //console.log("cartItems", cartItems);
+
+  const reqCart = useSelector((state) => state.reqCart);
+  const { reqCartItems } = reqCart;
+  //console.log("reqCartItems", reqCartItems);
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   //console.log("now", userInfo);
@@ -88,9 +116,25 @@ const Header = () => {
                         <Link className="dropdown-item" to="/profile">
                           Profile
                         </Link>
-                        <Link className="dropdown-item" to="/order-list">
+                        {/* <Link className="dropdown-item" to="/order-list">
                           Order
                         </Link>
+                        <Link className="dropdown-item" to="/order-list">
+                          Request
+                        </Link> */}
+
+                        {service ? (
+                          <Link
+                            className="dropdown-item"
+                            to="/service/request-list"
+                          >
+                            Request
+                          </Link>
+                        ) : (
+                          <Link className="dropdown-item" to="/order-list">
+                            Order
+                          </Link>
+                        )}
 
                         <Link
                           className="dropdown-item"
@@ -185,9 +229,24 @@ const Header = () => {
                       <Link className="dropdown-item" to="/profile">
                         Profile
                       </Link>
-                      <Link className="dropdown-item" to="/order-list">
+                      {/* <Link className="dropdown-item" to="/order-list">
                         Order
                       </Link>
+                      <Link className="dropdown-item" to="/profile">
+                        Request
+                      </Link> */}
+                      {service ? (
+                        <Link
+                          className="dropdown-item"
+                          to="/service/request-list"
+                        >
+                          Request
+                        </Link>
+                      ) : (
+                        <Link className="dropdown-item" to="/order-list">
+                          Order
+                        </Link>
+                      )}
 
                       <Link
                         className="dropdown-item"
@@ -205,10 +264,18 @@ const Header = () => {
                   </>
                 )}
 
-                <Link to="/cart">
-                  <i className="fas fa-shopping-bag"></i>
-                  <span className="badge">{cartItems.length}</span>
-                </Link>
+                {service ? (
+                  <Link to="/service/req-cart">
+                    {/* <i className="fas fa-shopping-bag"></i> */}
+                    <i className="fas fa-toolbox"></i>
+                    <span className="badge">{reqCartItems.length}</span>
+                  </Link>
+                ) : (
+                  <Link to="/cart">
+                    <i className="fas fa-shopping-bag"></i>
+                    <span className="badge">{cartItems.length}</span>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
