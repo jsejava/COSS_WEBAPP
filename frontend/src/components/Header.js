@@ -16,14 +16,23 @@ const Header = () => {
   const myArray = pathname.split("/");
   let x = myArray[1];
   let y = "service";
+  let z = "profile";
   let service;
+  let profile;
   //console.log(x);
-  if (x == y) {
-    //console.log("okay");
-    service = y;
+
+  if (x == z) {
+    profile = z;
   } else {
-    service = undefined;
+    if (x == y) {
+      //console.log("okay");
+      service = y;
+    } else {
+      service = undefined;
+    }
   }
+
+  console.log(profile);
   //console.log(host);
   // console.log(hostname);
   // console.log(href);
@@ -263,6 +272,15 @@ const Header = () => {
                     <Link to="/login">Login</Link>
                   </>
                 )}
+                {profile ? (
+                  <>
+                    <Link to="/service/req-cart">
+                      {/* <i className="fas fa-shopping-bag"></i> */}
+                      <i className="fas fa-toolbox"></i>
+                      <span className="badge">{reqCartItems.length}</span>
+                    </Link>
+                  </>
+                ) : null}
 
                 {service ? (
                   <Link to="/service/req-cart">

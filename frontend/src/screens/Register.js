@@ -70,7 +70,7 @@ const Register = ({ location, history }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <input
-            type="text"
+            type="password"
             placeholder="Enter a Pin"
             value={pin}
             onChange={(e) => setPin(e.target.value)}

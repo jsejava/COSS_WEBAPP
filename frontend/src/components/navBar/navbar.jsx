@@ -65,19 +65,29 @@ function Navbar() {
           </li>
           <li className="nav__item">
             <a href="#" className="nav__link">
-              Portfolio
+              Store
             </a>
           </li>
           <li className="nav__item">
             <a href="#" className="nav__link">
-              Skills
+              Service
             </a>
           </li>
           <li className="nav__item">
+            <a href="#" className="nav__link">
+              Pay
+            </a>
+          </li>
+          <li className="nav__item">
+            <a href="#" className="nav__link">
+              Connect
+            </a>
+          </li>
+          {/* <li className="nav__item">
             <a href="#" className="nav__link">
               Contact
             </a>
-          </li>
+          </li> */}
         </ul>
         <div onClick={navToggle} className={icon}>
           <div className="line1"></div>

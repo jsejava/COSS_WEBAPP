@@ -113,7 +113,7 @@ const ProfileTabs = () => {
             <label for="account-fn">PIN</label>
             <input
               className="form-control"
-              type="text"
+              type="password"
               value={pin}
               onChange={(e) => setPin(e.target.value)}
               placeholder="*   *   *   *"

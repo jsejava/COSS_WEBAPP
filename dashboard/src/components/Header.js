@@ -70,9 +70,9 @@ const Header = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="#">
-              CampusStore
-            </Link>
+            <a className="nav-link" href="http://localhost:3000/">
+              Campus Store & Services
+            </a>
           </li>
           <li className="dropdown nav-item">
             <Link className="dropdown-toggle" data-bs-toggle="dropdown" to="#">
