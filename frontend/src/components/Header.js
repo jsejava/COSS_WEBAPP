@@ -32,7 +32,7 @@ const Header = () => {
     }
   }
 
-  console.log(profile);
+  // console.log(profile);
   //console.log(host);
   // console.log(hostname);
   // console.log(href);
@@ -51,10 +51,11 @@ const Header = () => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  //console.log("now", userInfo);
+  // console.log("now", userInfo);
 
   const logoutHandler = () => {
     dispatch(logout());
+    history.push("/");
   };
 
   const submitHandler = (e) => {
@@ -166,13 +167,13 @@ const Header = () => {
                         <i class="fas fa-user"></i>
                       </button>
                       <div className="dropdown-menu">
-                        <Link className="dropdown-item" to="/login">
+                        {/* <Link className="dropdown-item" to="/login">
                           Login
                         </Link>
 
                         <Link className="dropdown-item" to="/register">
                           Register
-                        </Link>
+                        </Link> */}
                       </div>
                     </div>
                   )}
@@ -268,8 +269,15 @@ const Header = () => {
                   </div>
                 ) : (
                   <>
-                    <Link to="/register">Register</Link>
-                    <Link to="/login">Login</Link>
+                    <Link to="#" className="text-warning">
+                      <i
+                        class="fa fa-shopping-basket text-warning"
+                        style={{ fontSize: "20px" }}
+                      ></i>{" "}
+                      <i>window shopping</i>
+                    </Link>
+                    {/* <Link to="/login">Login</Link> */}
+                    {/* <p>window shopping</p> */}
                   </>
                 )}
                 {profile ? (

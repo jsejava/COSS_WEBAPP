@@ -13,7 +13,6 @@ const userSchema = mongoose.Schema(
     },
     pin: {
       type: String,
-      require: true,
     },
     email: {
       type: String,
@@ -24,10 +23,17 @@ const userSchema = mongoose.Schema(
       type: String,
       require: true,
     },
+    Wallet: {
+      type: Number,
+      default: 0,
+    },
     isAdmin: {
       type: Boolean,
       require: true,
       default: false,
+    },
+    isVerified: {
+      type: Boolean,
     },
   },
   {
@@ -59,6 +65,11 @@ userSchema.pre("save", async function (next) {
   this.pin = await bcrypt.hash(this.pin, salt);
   next();
 });
+//match Pin
+userSchema.methods.isPinMatched = async function (enteredPin) {
+  return await bcrypt.compare(enteredPin, this.pin);
+};
+
 const User = mongoose.model("User", userSchema);
 
 export default User;

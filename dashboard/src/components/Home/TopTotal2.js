@@ -2,14 +2,17 @@ import React from "react";
 
 const TopTotal2 = (props) => {
   const { orders, products, requests, services } = props;
-  console.log(requests);
-  let totalService = 0;
+  //console.log(requests);
+  let totalCharge = 0;
   let totalSale = 0;
   if (requests) {
-    requests.map((order) =>
-      order.isPaid === true
-        ? (totalService = totalService + requests.itemsPrice)
-        : null
+    requests.map(
+      (order) =>
+        order.isPaid === true
+          ? (totalCharge = totalCharge + order.shippingPrice)
+          : null
+
+      // console.log(order.shippingPrice)
     );
   }
 
@@ -30,7 +33,7 @@ const TopTotal2 = (props) => {
               </span>
               <div className="text">
                 <h6 className="mb-1">Total Charges</h6>{" "}
-                <span>Gh₵ {totalService.toFixed(0)}</span>
+                <span>Gh₵ {totalCharge.toFixed(0)}</span>
               </div>
             </article>
             {/* </div> */}
@@ -67,7 +70,7 @@ const TopTotal2 = (props) => {
               </span>
               <div className="text">
                 <h6 className="mb-1">Total Incomes</h6>
-                <span>Gh₵ {(totalSale + totalService).toFixed(0)}</span>
+                <span>Gh₵ {(totalSale + totalCharge).toFixed(0)}</span>
               </div>
             </article>
           </div>

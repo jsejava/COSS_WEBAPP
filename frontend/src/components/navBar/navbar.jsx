@@ -58,28 +58,24 @@ function Navbar() {
               Home
             </a>
           </li>
+
           <li className="nav__item">
-            <a href="#" className="nav__link">
-              About
-            </a>
-          </li>
-          <li className="nav__item">
-            <a href="#" className="nav__link">
+            <a href="/shop" className="nav__link">
               Store
             </a>
           </li>
           <li className="nav__item">
-            <a href="#" className="nav__link">
+            <a href="/service" className="nav__link">
               Service
             </a>
           </li>
           <li className="nav__item">
-            <a href="#" className="nav__link">
+            <a href="http://localhost:4000" className="nav__link">
               Pay
             </a>
           </li>
           <li className="nav__item">
-            <a href="#" className="nav__link">
+            <a href="http://localhost:4001/" className="nav__link">
               Connect
             </a>
           </li>

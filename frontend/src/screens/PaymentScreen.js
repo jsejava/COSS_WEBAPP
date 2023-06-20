@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Toast from "../components/LoadingError/Toast";
 import { savePaymentMethod } from "../Redux/Actions/cartActions";
 import Header from "./../components/Header";
+import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
+import SuccessMessage from "../components/SuccessMessage";
 
 const PaymentScreen = ({ history }) => {
   window.scrollTo(0, 0);
@@ -44,20 +48,34 @@ const PaymentScreen = ({ history }) => {
               <input
                 className="form-check-input"
                 type="radio"
-                value="PayStack"
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
-              <label className="form-check-label">PayStack</label>
-            </div>
-            <div className="radio-container">
-              <input
-                className="form-check-input"
-                type="radio"
                 value="CampusPay"
                 onChange={(e) => setPaymentMethod(e.target.value)}
               />
               <label className="form-check-label">CampusPay</label>
             </div>
+            <Tippy
+              className="tippy-tooltip.tomato-theme"
+              delay={100}
+              theme="tomato"
+              placement="right"
+              content={
+                <SuccessMessage
+                  title="Cash Payment Methode"
+                  msg="Are Not Available For The Moment"
+                />
+              }
+            >
+              <div className="radio-container">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  value="Cash"
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  disabled
+                />
+                <label className="form-check-label">Cash</label>
+              </div>
+            </Tippy>
             {/* <div className="radio-container">
               <input
                 className="form-check-input"

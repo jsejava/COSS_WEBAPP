@@ -27,8 +27,19 @@ app.use("/api/services", serviceRoute);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/request", RequestRouter);
-app.get("/api/config/paypal", (req, res) => {
-  res.send(process.env.PAYPAL_CLIENT_ID);
+
+// register view engine
+app.set("view engine", "ejs");
+
+//listen for request
+
+// middleware & static files
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+// app.use(morgan("dev"));
+// route
+app.get("http://localhost:5000/api/users/verify/:token", (req, res) => {
+  res.render("about");
 });
 
 // ERROR HANDLER

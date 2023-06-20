@@ -31,12 +31,16 @@ import RequestScreen from "./screens/RequestScreen";
 import RequestListScreen from "./screens/RequestListScreen";
 import ReqPayScreen from "./screens/ReqPayScreen";
 import ConfReqScreen from "./screens/ConfReqScreen";
+import TooltipScreen from "./screens/tooltip/TooltipScreen";
+import Text from "./screens/Text";
+import LoginReg from "./screens/LoginReg";
 
 const App = () => {
   return (
     <Router>
       <Switch>
         <Route path="/" component={HomeScreen} exact />
+        <Route path="/text" component={Text} exact />
         <Route path="/shop" component={ShopScreen} exact />
         <Route path="/service" component={ServiceScreen} exact />
         <Route path="/search/:keyword" component={ShopScreen} exact />
@@ -49,6 +53,7 @@ const App = () => {
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/service/services/:id" component={SingleService} />
         <Route path="/login" component={Login} />
+        <Route path="/login-reg" component={LoginReg} />
         <Route path="/register" component={Register} />
         <PrivateRouter path="/profile" component={ProfileScreen} />
         <PrivateRouter path="/order-list" component={OrderListScreen} />

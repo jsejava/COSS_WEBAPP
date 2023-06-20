@@ -14,11 +14,11 @@ const Login = ({ history }) => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { error, loading, userInfo } = userLogin;
+  console.log(userInfo);
 
   useEffect(() => {
     if (userInfo) {
       history.push("/");
-    } else {
     }
   }, [userInfo, history]);
 

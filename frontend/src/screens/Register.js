@@ -5,84 +5,157 @@ import Message from "../components/LoadingError/Error";
 import Loading from "../components/LoadingError/Loading";
 import { register } from "../Redux/Actions/userAction";
 import Header from "./../components/Header";
+import SuccessMessage from "../components/SuccessMessage";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+//Form validation
+const formSchema = Yup.object({
+  email: Yup.string().required("Email is required"),
+  password: Yup.string().required("Password is required"),
+  // pin: Yup.string().required("pin is required"),
+  firstname: Yup.string().required("First name is required"),
+  lastname: Yup.string().required("Last name is required"),
+});
 
 const Register = ({ location, history }) => {
   window.scrollTo(0, 0);
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [pin, setPin] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  //// const [firstname, setFirstname] = useState("");
+  //// const [lastname, setLastname] = useState("");
+  // // const [pin, setPin] = useState("");
+  // // const [email, setEmail] = useState("");
+  //// const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   const userRegister = useSelector((state) => state.userRegister);
-  const { error, loading, userInfo } = userRegister;
+  let { error, loading, registered } = userRegister;
 
-  useEffect(() => {
-    if (userInfo) {
-      history.push(redirect);
-    }
-  }, [userInfo, history, redirect]);
+  console.log(localStorage.getItem("locationPage"));
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    // console.log(firstname, lastname, pin, email, password);
-    dispatch(register(firstname, lastname, email, pin, password));
-  };
+  // console.log(userRegister);
+
+  useEffect(
+    () => {
+      setTimeout(() => {
+        if (registered)
+          //history.push(redirect);
+          history.push("/login-reg");
+      }, 5000);
+    },
+    ////[registered, history]);
+    [registered]
+  );
+
+  //initialize form
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      firstname: "",
+      lastname: "",
+      // pin: "",
+      amount: 5,
+    },
+    onSubmit: (values) => {
+      ////console.log(values);
+      dispatch(register(values));
+      //// dispatch(addNewWalAction(values));
+    },
+    validationSchema: formSchema,
+  });
+
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+
+  //   dispatch(register(firstname, lastname, email, password));
+  // };
 
   return (
     <>
       <Header />
-      <div className="container d-flex flex-column justify-content-center align-items-center login-center">
-        {error && <Message variant="alert-danger">{error}</Message>}
-        {loading && <Loading />}
-        {/* <div>
-          <img alt="logo" src="/logo/s2.jpeg" />
-        </div> */}
-        <form
-          className="Login col-md-8 col-lg-4 col-11"
-          onSubmit={submitHandler}
-        >
-          <input
-            type="text"
-            placeholder="First Name"
-            value={firstname}
-            onChange={(e) => setFirstname(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Last Name"
-            value={lastname}
-            onChange={(e) => setLastname(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Enter a Pin"
-            value={pin}
-            onChange={(e) => setPin(e.target.value)}
-          />
-          <button type="submit">Register</button>{" "}
-          <p>
-            <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-              I Have Account <strong>Login</strong>
-            </Link>
-          </p>
-        </form>
-      </div>
+
+      {registered ? (
+        <>
+          <div className="col-12 col-lg d-flex flex-column justify-content-center align-items-center login-center">
+            <div className="p-5 bg-light rounded text-center">
+              <SuccessMessage
+                title=" Registration Successfully"
+                msg=" An Email is sent to your mail please verifier"
+                description=" For a successul Login"
+              />
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="container d-flex flex-column justify-content-center align-items-center login-center">
+            {error && <Message variant="alert-danger">{error}</Message>}
+            {loading && <Loading />}
+
+            <form
+              className="Login col-md-8 col-lg-4 col-11"
+              onSubmit={formik.handleSubmit}
+            >
+              <input
+                value={formik.values.firstname}
+                onBlur={formik.handleBlur("firstname")}
+                onChange={formik.handleChange("firstname")}
+                // className="form-control mb-2"
+                type="text"
+                placeholder="First Name"
+              />
+              {/* Err */}
+              <div className="text-danger mb-2">
+                {formik.touched.firstname && formik.errors.firstname}
+              </div>
+              <input
+                value={formik.values.lastname}
+                onBlur={formik.handleBlur("lastname")}
+                onChange={formik.handleChange("lastname")}
+                // className="form-control mb-2"
+                type="TEXT"
+                placeholder="Last Name"
+              />
+              {/* Err */}
+              <div className="text-danger mb-2">
+                {formik.touched.lastname && formik.errors.lastname}
+              </div>
+              <input
+                value={formik.values.email}
+                onBlur={formik.handleBlur("email")}
+                onChange={formik.handleChange("email")}
+                // className="form-control mb-2"
+                type="email"
+                placeholder="Email"
+              />
+              {/* Err */}
+              <div className="text-danger mb-2">
+                {formik.touched.email && formik.errors.email}
+              </div>
+              <input
+                value={formik.values.password}
+                onBlur={formik.handleBlur("password")}
+                onChange={formik.handleChange("password")}
+                // className="form-control mb-2"
+                type="password"
+                placeholder="Password"
+              />
+              {/* Err */}
+              <div className="text-danger mb-2">
+                {formik.touched.password && formik.errors.password}
+              </div>
+              <button type="submit">Register</button>{" "}
+              <p>
+                <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+                  I Have Account <strong>Login</strong>
+                </Link>
+              </p>
+            </form>
+          </div>
+        </>
+      )}
     </>
   );
 };

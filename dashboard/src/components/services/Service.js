@@ -24,7 +24,7 @@ const Service = (props) => {
             <Link to="#" className="title text-truncate">
               {service.name}
             </Link>
-            <div className="price mb-2">${service.price}</div>
+            <div className="price mb-2">Gh₵ {service.price}</div>
             <div className="row">
               <Link
                 to={`/service/${service._id}/edit`}

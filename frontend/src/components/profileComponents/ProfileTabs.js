@@ -9,10 +9,14 @@ import { updateUserProfile } from "../../Redux/Actions/userAction";
 const ProfileTabs = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
-  const [pin, setPin] = useState("");
-  const [email, setEmail] = useState("");
+  // const [pin, setPin] = useState("");
+  // const [newpin, setNewin] = useState("");
+  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  // const [showPin, setShowPin] = useState(false);
+  const [showPass, setShowPass] = useState(false);
+
   const toastId = React.useRef(null);
 
   const Toastobjects = {
@@ -35,10 +39,14 @@ const ProfileTabs = () => {
       setFirstname(user.firstname);
       setLastname(user.lastname);
       // setPin(user.pin);
-      setEmail(user.email);
+      // setEmail(user.email);
       //console.log(user);
     }
   }, [dispatch, user]);
+
+  // function pinHandler() {
+  //   setShowPin(true);
+  // }
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -53,8 +61,9 @@ const ProfileTabs = () => {
           id: user._id,
           firstname,
           lastname,
-          pin,
-          email,
+          // pin,
+          // newpin,
+          //email,
           password,
         })
       );
@@ -70,6 +79,23 @@ const ProfileTabs = () => {
       {error && <Message variant="alert-danger">{error}</Message>}
       {loading && <Loading />}
       {updateLoading && <Loading />}
+
+      <div className="col-12 col-md-12 row  form-container mt-5">
+        <div className="form mt-5">
+          {/* <div
+            className="btn btn-outline-danger col-12 col-md-2"
+            onClick={() => setShowPin(!showPin)}
+          >
+            Change Pin
+          </div> */}
+          <div
+            className="btn btn-outline-danger col-12 col-md-2"
+            onClick={() => setShowPass(!showPass)}
+          >
+            Change Password
+          </div>
+        </div>
+      </div>
       <form className="row  form-container" onSubmit={submitHandler}>
         <div className="col-md-6">
           <div className="form">
@@ -95,8 +121,36 @@ const ProfileTabs = () => {
             />
           </div>
         </div>
+        {/* {showPin ? (
+          <>
+            <div className="col-md-6">
+              <div className="form">
+                <label for="account-pin">current pin</label>
+                <input
+                  className="form-control"
+                  type="password"
+                  value={pin}
+                  onChange={(e) => setPin(e.target.value)}
+                  placeholder="*   *   *   *"
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="form">
+                <label for="account-newpin">new pin</label>
+                <input
+                  className="form-control"
+                  type="password"
+                  value={newpin}
+                  onChange={(e) => setNewin(e.target.value)}
+                  placeholder="*   *   *   *"
+                />
+              </div>
+            </div>
+          </>
+        ) : null} */}
 
-        <div className="col-md-6">
+        {/* <div className="col-md-6">
           <div className="form">
             <label for="account-email">E-mail Address</label>
             <input
@@ -107,43 +161,35 @@ const ProfileTabs = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-        </div>
-        <div className="col-md-6">
-          <div className="form">
-            <label for="account-fn">PIN</label>
-            <input
-              className="form-control"
-              type="password"
-              value={pin}
-              onChange={(e) => setPin(e.target.value)}
-              placeholder="*   *   *   *"
-            />
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="form">
-            <label for="account-pass">New Password</label>
-            <input
-              className="form-control"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="*   *   *   *"
-            />
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="form">
-            <label for="account-confirm-pass">Confirm Password</label>
-            <input
-              className="form-control"
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="*   *   *   *"
-            />
-          </div>
-        </div>
+        </div> */}
+        {showPass ? (
+          <>
+            <div className="col-md-6">
+              <div className="form">
+                <label for="account-pass">New Password</label>
+                <input
+                  className="form-control"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="*   *   *   *"
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="form">
+                <label for="account-confirm-pass">Confirm Password</label>
+                <input
+                  className="form-control"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="*   *   *   *"
+                />
+              </div>
+            </div>
+          </>
+        ) : null}
         <button type="submit">Update Profile</button>
       </form>
     </>

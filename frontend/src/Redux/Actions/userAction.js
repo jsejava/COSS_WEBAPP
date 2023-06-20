@@ -19,34 +19,36 @@ import {
 } from "../Constants/UserContant";
 
 // LOGIN
-export const login = (email, password) => async (dispatch) => {
-  try {
-    dispatch({ type: USER_LOGIN_REQUEST });
+export const login =
+  ({ email, password }) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: USER_LOGIN_REQUEST });
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-    const { data } = await axios.post(
-      `http://localhost:5000/api/users/login`,
-      { email, password },
-      config
-    );
-    dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+      const { data } = await axios.post(
+        `http://localhost:5000/api/users/login`,
+        { email, password },
+        config
+      );
+      dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
-    localStorage.setItem("userInfo", JSON.stringify(data));
-  } catch (error) {
-    dispatch({
-      type: USER_LOGIN_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+      localStorage.setItem("userInfo", JSON.stringify(data));
+    } catch (error) {
+      dispatch({
+        type: USER_LOGIN_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 // LOGOUT
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
@@ -58,7 +60,8 @@ export const logout = () => (dispatch) => {
 
 // REGISTER
 export const register =
-  (firstname, lastname, email, pin, password) => async (dispatch) => {
+  ({ firstname, lastname, email, password }) =>
+  async (dispatch) => {
     try {
       dispatch({ type: USER_REGISTER_REQUEST });
 
@@ -70,13 +73,13 @@ export const register =
 
       const { data } = await axios.post(
         `http://localhost:5000/api/users`,
-        { firstname, lastname, email, pin, password },
+        { firstname, lastname, email, password },
         config
       );
       dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
-      dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+      // dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      // localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: USER_REGISTER_FAIL,

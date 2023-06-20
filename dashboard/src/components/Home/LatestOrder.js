@@ -22,10 +22,10 @@ const LatestOrder = (props) => {
                 <tr key={order._id}>
                   <td>
                     <b>
-                      {order.user.firstname} {order.user.lastname}
+                      {order?.user?.firstname} {order?.user?.lastname}
                     </b>
                   </td>
-                  <td>{order.user.email}</td>
+                  <td>{order?.user?.email}</td>
                   <td>Gh₵ {order.totalPrice}</td>
                   <td>
                     {order.isPaid ? (

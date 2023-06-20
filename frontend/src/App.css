@@ -402,7 +402,7 @@ textarea:focus {
 }
 
 /* LOGIN */
-.login-center {
+.msg-center {
   padding: 50px 0;
 }
 .Login,
@@ -425,6 +425,7 @@ textarea:focus {
 .Login input:focus {
   outline: 0px;
 }
+
 .Login button,
 .Login2 button {
   width: 100%;
@@ -758,4 +759,14 @@ textarea:focus {
   width: 50%;
   height: 100%;
   object-fit: contain;
+}
+.tippy-tooltip.tomato-theme {
+  /* background-color: #e1ebecab; */
+  background-color: rgb(198, 236, 202);
+  color: rgb(3, 12, 43);
+
+  border-radius: 30px;
+}
+.shop :hover {
+  background-color: rgb(198, 236, 202);
 }

@@ -84,3 +84,12 @@ li {
 .toggle .line3 {
   transform: rotate(45deg) translate(-4px, -5px);
 }
+.nav__item a {
+  font-size: 25px;
+}
+/* .nav__item a :hover {
+  color: #1cb803;
+} */
+a:hover {
+  color: #1cb803;
+}

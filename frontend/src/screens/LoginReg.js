@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Header from "./../components/Header";
+import Header from "../components/Header";
 import { login } from "../Redux/Actions/userAction";
 import Message from "../components/LoadingError/Error";
 import Loading from "../components/LoadingError/Loading";
@@ -13,25 +13,30 @@ const formSchema = Yup.object({
   password: Yup.string().required("Password is required"),
 });
 
-const Login = ({ location, history }) => {
+const LoginReg = ({ location, history }) => {
   window.scrollTo(0, 0);
+
+  // const page = localStorage.getItem("locationPage");
+  // console.log("local_locationPage", page);
 
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-  const redirect = location.search ? location.search.split("=")[1] : `/`;
+  const redirect = location.search ? location.search.split("=")[1] : "/";
   // console.log(location.search);
-  const locationPage = location?.search?.split("=")[1];
-
-  localStorage.setItem("locationPage", locationPage);
+  // console.log(location.search.split("=")[1]);
   console.log(localStorage.getItem("locationPage"));
+
   const userLogin = useSelector((state) => state.userLogin);
   const { error, loading, userInfo } = userLogin;
 
   useEffect(() => {
     if (userInfo) {
-      history.push(redirect);
+      console.log(localStorage.getItem("locationPage"));
+      const page = localStorage.getItem("locationPage");
+      console.log("local_locationPage", page);
+      history.push(`/${page}`);
     }
   }, [userInfo, history, redirect]);
 
@@ -104,4 +109,4 @@ const Login = ({ location, history }) => {
   );
 };
 
-export default Login;
+export default LoginReg;

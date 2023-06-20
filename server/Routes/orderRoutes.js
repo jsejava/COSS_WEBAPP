@@ -66,6 +66,7 @@ orderRouter.get(
   "/",
   protect,
   asyncHandler(async (req, res) => {
+    console.log("orders", req.user._id);
     const order = await Order.find({ user: req.user._id }).sort({ _id: -1 });
     res.json(order);
   })
