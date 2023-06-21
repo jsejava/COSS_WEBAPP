@@ -35,6 +35,7 @@ const ShippingScreen = ({ history }) => {
   const [city, setCity] = useState(shippingAddress.city);
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
   const [country, setCountry] = useState(shippingAddress.country);
+  const [error, setError] = useState(false);
 
   let hostel = {};
   const campus = [
@@ -50,17 +51,13 @@ const ShippingScreen = ({ history }) => {
   } else {
     hostel = hostel_lagon;
   }
-
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(address, city, postalCode, country);
-    // if (address) {
-    //   console.log("okay");
-    // } else {
-    //   console.log("address is null");
-    // }
+    if (postalCode.trim().length === 0) {
+      return setError(true);
+    }
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
     history.push("/payment");
   };
@@ -73,20 +70,12 @@ const ShippingScreen = ({ history }) => {
           onSubmit={submitHandler}
         >
           <h6>DELIVERY ADDRESS</h6>
-          {/* <input
-            type="text"
-            placeholder="Enter Campus"
-            value={address}
-            required
-            onChange={(e) => setAddress(e.target.value)}
-          /> */}
 
           <Select
-            //className="select"
             styles={{
               control: (baseStyles, state) => ({
                 ...baseStyles,
-                // borderColor: state.isFocused ? "grey" : "#8a8a8a",
+
                 width: "100%",
                 padding: "10px 20px",
                 marginTop: "20px",
@@ -131,11 +120,19 @@ const ShippingScreen = ({ history }) => {
                     required
                     onChange={(e) => setPostalCode(e.target.value)}
                   />
+
                   {postalCode ? <button type="submit">Continue</button> : null}
                 </>
               ) : null}
             </>
           ) : null}
+          {error ? (
+            <label style={{ color: "red", marginTop: "10px" }}>
+              Room Number can't be Empty
+            </label>
+          ) : (
+            ""
+          )}
         </form>
       </div>
     </>

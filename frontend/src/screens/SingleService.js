@@ -11,17 +11,16 @@ import {
 import Loading from "../components/LoadingError/Loading";
 import { SERVICE_CREATE_REVIEW_RESET } from "../Redux/Constants/ServiceConstants";
 import moment from "moment";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
+const MySwal = withReactContent(Swal);
 const SingleService = ({ history, match }) => {
   const [qty, setQty] = useState(10);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-
-  // console.log(qty);
-
   const serviceId = match.params.id;
   const dispatch = useDispatch();
-
   const serviceDetails = useSelector((state) => state.serviceDetails);
   const { loading, error, service } = serviceDetails;
   console.log(service);
@@ -36,7 +35,24 @@ const SingleService = ({ history, match }) => {
 
   useEffect(() => {
     if (successCreateReview) {
-      alert("Review Submitted");
+      //alert("Review Submitted");
+      let timerInterval;
+      Swal.fire({
+        title: "Review Submitted...",
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer().querySelector("b");
+          timerInterval = setInterval(() => {}, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+        }
+      });
       setRating(0);
       setComment("");
       dispatch({ type: SERVICE_CREATE_REVIEW_RESET });

@@ -11,15 +11,16 @@ import {
 import Loading from "../components/LoadingError/Loading";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../Redux/Constants/ProductConstants";
 import moment from "moment";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
+const MySwal = withReactContent(Swal);
 const SingleProduct = ({ history, match }) => {
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-
   const productId = match.params.id;
   const dispatch = useDispatch();
-
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
   const userLogin = useSelector((state) => state.userLogin);
@@ -34,7 +35,23 @@ const SingleProduct = ({ history, match }) => {
   // console.log(userInfo);
   useEffect(() => {
     if (successCreateReview) {
-      alert("Review Submitted");
+      let timerInterval;
+      Swal.fire({
+        title: "Review Submitted...",
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer().querySelector("b");
+          timerInterval = setInterval(() => {}, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+        }
+      });
       setRating(0);
       setComment("");
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
