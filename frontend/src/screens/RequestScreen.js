@@ -54,7 +54,7 @@ const RequestScreen = ({ history, match }) => {
     //console.log(_id);
     localStorage.setItem("requestId", _id);
     const x = localStorage.getItem("requestId");
-    console.log("local", x);
+    // console.log("local", x);
   }
 
   function doOnce() {

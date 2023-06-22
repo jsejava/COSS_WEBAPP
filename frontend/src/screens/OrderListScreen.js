@@ -20,7 +20,7 @@ const OrderListScreen = ({ history }) => {
 
   const { loading, error, orders } = orderListMy;
 
-  console.log("orders", orders?.length);
+  // console.log("orders", orders?.length);
 
   useEffect(() => {
     dispatch(listMyOrders());

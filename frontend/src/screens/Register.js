@@ -25,6 +25,8 @@ const Register = ({ location, history }) => {
   // // const [pin, setPin] = useState("");
   // // const [email, setEmail] = useState("");
   //// const [password, setPassword] = useState("");
+  const [Empty, setEmpty] = useState(false);
+  // const [Emptyln, setEmptyln] = useState(false);
 
   const dispatch = useDispatch();
   const redirect = location.search ? location.search.split("=")[1] : "/";
@@ -32,7 +34,7 @@ const Register = ({ location, history }) => {
   const userRegister = useSelector((state) => state.userRegister);
   let { error, loading, registered } = userRegister;
 
-  console.log(localStorage.getItem("locationPage"));
+  // console.log(localStorage.getItem("locationPage"));
 
   // console.log(userRegister);
 
@@ -51,26 +53,24 @@ const Register = ({ location, history }) => {
   //initialize form
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
       firstname: "",
       lastname: "",
-      // pin: "",
+      email: "",
+      password: "",
       amount: 5,
     },
+
     onSubmit: (values) => {
-      ////console.log(values);
-      dispatch(register(values));
-      //// dispatch(addNewWalAction(values));
+      if (
+        values.firstname.trim().length === 0 ||
+        values.lastname.trim().length === 0
+      )
+        return setEmpty(true);
+
+      // dispatch(addNewWalAction(values));
     },
     validationSchema: formSchema,
   });
-
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-
-  //   dispatch(register(firstname, lastname, email, password));
-  // };
 
   return (
     <>
@@ -82,7 +82,7 @@ const Register = ({ location, history }) => {
             <div className="p-5 bg-light rounded text-center">
               <SuccessMessage
                 title=" Registration Successfully"
-                msg=" An Email is sent to your mail please verifier"
+                msg=" An Email is sent to your mail please verify"
                 description=" For a successul Login"
               />
             </div>
@@ -109,6 +109,11 @@ const Register = ({ location, history }) => {
               {/* Err */}
               <div className="text-danger mb-2">
                 {formik.touched.firstname && formik.errors.firstname}
+                {Empty && formik.values.firstname.trim().length <= 0 ? (
+                  <label>First Name can't be Empty</label>
+                ) : (
+                  ""
+                )}
               </div>
               <input
                 value={formik.values.lastname}
@@ -121,6 +126,11 @@ const Register = ({ location, history }) => {
               {/* Err */}
               <div className="text-danger mb-2">
                 {formik.touched.lastname && formik.errors.lastname}
+                {Empty && formik.values.lastname.trim().length <= 0 ? (
+                  <label>Last Name can't be Empty</label>
+                ) : (
+                  ""
+                )}
               </div>
               <input
                 value={formik.values.email}

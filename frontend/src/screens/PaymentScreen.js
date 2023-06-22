@@ -60,7 +60,7 @@ const PaymentScreen = ({ history }) => {
               placement="right"
               content={
                 <SuccessMessage
-                  title="Cash Payment Methode"
+                  title="Cash Payment Method"
                   msg="Are Not Available For The Moment"
                 />
               }

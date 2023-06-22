@@ -41,7 +41,7 @@ const ServiceShipScreen = ({ history }) => {
   const campus = [
     { value: "CUG", label: "CUG" },
     { value: "UNER", label: "UNER" },
-    { value: "LAGON", label: "LAGON" },
+    { value: "LEGON", label: "LEGON" },
   ];
 
   if (address == "CUG") {
