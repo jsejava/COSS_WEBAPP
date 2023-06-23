@@ -160,7 +160,9 @@ const SingleProduct = ({ history, match }) => {
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} />
                     <span>{moment(review.createdAt).calendar()}</span>
-                    <div className="alert alert-info mt-3">
+                    <div
+                      className={review.comment ? "alert alert-info mt-3" : ""}
+                    >
                       {review.comment}
                     </div>
                   </div>

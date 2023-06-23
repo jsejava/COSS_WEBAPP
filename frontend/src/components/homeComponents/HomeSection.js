@@ -6,6 +6,8 @@ import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import SuccessMessage from "../SuccessMessage";
+import payUrl from "../../components/appUrl/payUrl";
+import connectionUrl from "../../components/appUrl/connectionUrl";
 
 const HomeSection = (props) => {
   const { keyword, pagenumber } = props;
@@ -91,7 +93,7 @@ const HomeSection = (props) => {
                 >
                   <div className="shop col-lg-3 col-md-6 col-sm-6">
                     <div className="border-welcome">
-                      <a href="http://localhost:4000/">
+                      <a href={payUrl}>
                         <div className="pageLogo">
                           <img src="./logo/pay-5.png" alt="shop" />
                         </div>
@@ -99,7 +101,7 @@ const HomeSection = (props) => {
 
                       <div className="welcometext">
                         <p>
-                          <Link to="/campuspay">Pay</Link>
+                          <a href={payUrl}>Pay</a>
                         </p>
                       </div>
                     </div>
@@ -119,7 +121,7 @@ const HomeSection = (props) => {
                 >
                   <div className="shop col-lg-3 col-md-6 col-sm-6">
                     <div className="border-welcome">
-                      <a href="http://localhost:4001/">
+                      <a href={connectionUrl}>
                         <div className="pageLogo">
                           <img src="./logo/chat.png" />
                         </div>
@@ -127,7 +129,7 @@ const HomeSection = (props) => {
 
                       <div className="welcometext">
                         <p>
-                          <Link to="/campuspay">Connection</Link>
+                          <a href={connectionUrl}>Connection</a>
                         </p>
                       </div>
                     </div>

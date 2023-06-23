@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import payUrl from "../components/appUrl/payUrl";
+import connectionUrl from "../components/appUrl/payUrl";
 
 const Footer = () => {
   return (
@@ -17,13 +19,13 @@ const Footer = () => {
           </Link>
         </div>
         <div className="card-name">
-          <a href="http://localhost:4000">
+          <a href={payUrl}>
             <img alt="visa" src="./logo/pay-5.png" />
           </a>
         </div>
 
         <div className="card-name">
-          <a href="http://localhost:4001">
+          <a href={connectionUrl}>
             <img alt="express" src="./logo/chat.png" />
           </a>
         </div>

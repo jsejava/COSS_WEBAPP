@@ -16,12 +16,13 @@ import { logout } from "./userAction";
 
 //   SERVICE LIST
 export const listService =
-  (keyword = " ", pageNumber = " ") =>
-  async (dispatch) => {
+  // (keyword = " ", pageNumber = " ") =>
+  () => async (dispatch) => {
     try {
       dispatch({ type: SERVICE_LIST_REQUEST });
       const { data } = await axios.get(
-        `http://localhost:5000/api/services?keyword=${keyword}&pageNumber=${pageNumber}`
+        //`http://localhost:5000/api/services?keyword=${keyword}&pageNumber=${pageNumber}`
+        `http://localhost:5000/api/services`
       );
       dispatch({ type: SERVICE_LIST_SUCCESS, payload: data });
     } catch (error) {

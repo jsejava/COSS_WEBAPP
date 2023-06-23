@@ -30,7 +30,7 @@ function App() {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  // console.log("userInfo", userInfo);
+  console.log("userInfo", userInfo);
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listProducts());

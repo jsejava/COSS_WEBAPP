@@ -13,10 +13,11 @@ const ServiceSection = (props) => {
 
   const serviceList = useSelector((state) => state.serviceList);
   const { loading, error, services, page, pages } = serviceList;
+  console.log(services);
 
   useEffect(() => {
-    dispatch(listService(keyword, pagenumber));
-  }, [dispatch, keyword, pagenumber]);
+    dispatch(listService());
+  }, [dispatch]);
   return (
     <>
       <div className="container">
@@ -81,11 +82,41 @@ const ServiceSection = (props) => {
                 )}
 
                 {/* Pagination */}
-                <Pagination
+                {/* <Pagination
                   pages={pages}
                   page={page}
                   keyword={keyword ? keyword : ""}
-                />
+                /> */}
+
+                <nav className="float-end mt-4" aria-label="Page navigation">
+                  <ul className="pagination">
+                    <li className="page-item disabled">
+                      <Link className="page-link" to="#">
+                        Previous
+                      </Link>
+                    </li>
+                    <li className="page-item active">
+                      <Link className="page-link" to="#">
+                        1
+                      </Link>
+                    </li>
+                    <li className="page-item">
+                      <Link className="page-link" to="#">
+                        2
+                      </Link>
+                    </li>
+                    <li className="page-item">
+                      <Link className="page-link" to="#">
+                        3
+                      </Link>
+                    </li>
+                    <li className="page-item">
+                      <Link className="page-link" to="#">
+                        Next
+                      </Link>
+                    </li>
+                  </ul>
+                </nav>
               </div>
             </div>
           </div>
