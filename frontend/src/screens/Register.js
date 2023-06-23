@@ -66,8 +66,7 @@ const Register = ({ location, history }) => {
         values.lastname.trim().length === 0
       )
         return setEmpty(true);
-
-      // dispatch(addNewWalAction(values));
+      dispatch(register(values));
     },
     validationSchema: formSchema,
   });

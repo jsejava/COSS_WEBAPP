@@ -14,7 +14,7 @@ const ServiceShipScreen = ({ history }) => {
     { value: "Chasis", label: "Chasis" },
     { value: "Swiss Life", label: "Swiss Life" },
     { value: "Price Of Peace", label: "Price Of Peace" },
-    { value: "Seat Of Wisedom", label: "Seat Of Wisedom" },
+    { value: "Seat Of Wisdom", label: "Seat Of Wisdom" },
     { value: "Barak Hostel", label: "Barak Hostel" },
   ];
   const hostel_uner = [
@@ -114,7 +114,7 @@ const ServiceShipScreen = ({ history }) => {
               {city ? (
                 <>
                   <input
-                    type="text"
+                    type="number"
                     placeholder="Enter Room Number"
                     value={postalCode}
                     required
