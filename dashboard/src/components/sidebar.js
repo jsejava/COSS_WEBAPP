@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import payAminUrl from "./appUrl/payAminUrl";
 
 const Sidebar = () => {
   return (
@@ -141,7 +142,7 @@ const Sidebar = () => {
               <a
                 activeClassName="active"
                 className="menu-link"
-                href="http://localhost:4000/dashboard"
+                href={payAminUrl}
               >
                 <i className="icon fas fa-ruble-sign"></i>
                 <span className="text">CampusPay</span>

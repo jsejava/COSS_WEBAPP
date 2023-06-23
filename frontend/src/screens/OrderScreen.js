@@ -10,6 +10,8 @@ import moment from "moment";
 import axios from "axios";
 import { ORDER_PAY_RESET } from "../Redux/Constants/OrderConstants";
 
+import addExpenceUrl from "../components/appUrl/addExpenceUrl";
+
 const OrderScreen = ({ history, match }) => {
   window.scrollTo(0, 0);
   // const [sdkReady, setSdkReady] = useState(false);
@@ -256,7 +258,7 @@ const OrderScreen = ({ history, match }) => {
                   {!order.isPaid && (
                     <div className="col-12">
                       {
-                        <a href="http://localhost:4000/add-expense">
+                        <a href={addExpenceUrl}>
                           <button
                             id="myBtn"
                             className="round-black-btn mb-4"

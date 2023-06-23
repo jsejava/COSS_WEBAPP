@@ -1,3 +1,4 @@
+import baseUrl from "../../components/baseUrl";
 import {
   REQUEST_DELIVERED_FAIL,
   REQUEST_DELIVERED_REQUEST,
@@ -26,10 +27,7 @@ export const listRequests = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `http://localhost:5000/api/request/all`,
-      config
-    );
+    const { data } = await axios.get(`${baseUrl}/api/request/all`, config);
 
     // console.log(data);
 
@@ -64,10 +62,7 @@ export const getRequestDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `http://localhost:5000/api/request/${id}`,
-      config
-    );
+    const { data } = await axios.get(`${baseUrl}/api/request/${id}`, config);
     dispatch({ type: REQUEST_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -100,7 +95,7 @@ export const deliverRequest = (order) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/request/${order._id}/delivered`,
+      `${baseUrl}/api/request/${order._id}/delivered`,
       {},
       config
     );

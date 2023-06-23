@@ -1,3 +1,4 @@
+import baseUrl from "../../components/baseUrl";
 import {
   SERVICE_CREATE_FAIL,
   SERVICE_CREATE_REQUEST,
@@ -32,10 +33,7 @@ export const listServices = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `http://localhost:5000/api/services/all`,
-      config
-    );
+    const { data } = await axios.get(`${baseUrl}/api/services/all`, config);
     // console.log(data);
     dispatch({ type: SERVICE_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -68,7 +66,7 @@ export const deleteService = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`http://localhost:5000/api/services/${id}`, config);
+    await axios.delete(`${baseUrl}api/services/${id}`, config);
 
     dispatch({ type: SERVICE_DELETE_SUCCESS });
   } catch (error) {
@@ -104,7 +102,7 @@ export const createService =
       };
 
       const { data } = await axios.post(
-        `http://localhost:5000/api/services/`,
+        `${baseUrl}/api/services/`,
         { name, price, description, image, countInStock, availability },
         config
       );
@@ -129,9 +127,7 @@ export const createService =
 export const editService = (id) => async (dispatch) => {
   try {
     dispatch({ type: SERVICE_EDIT_REQUEST });
-    const { data } = await axios.get(
-      `http://localhost:5000/api/services/${id}`
-    );
+    const { data } = await axios.get(`${baseUrl}/api/services/${id}`);
     dispatch({ type: SERVICE_EDIT_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -165,7 +161,7 @@ export const updateService = (product) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/services/${product._id}`,
+      `${baseUrl}/api/services/${product._id}`,
       product,
       config
     );

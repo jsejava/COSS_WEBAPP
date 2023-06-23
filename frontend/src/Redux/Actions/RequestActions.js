@@ -1,3 +1,4 @@
+import baseUrl from "../../components/baseUrl";
 import {
   REQUEST_CREATE_REQUEST,
   REQUEST_CREATE_SUCCESS,
@@ -36,11 +37,7 @@ export const createRequest = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(
-      `http://localhost:5000/api/request`,
-      order,
-      config
-    );
+    const { data } = await axios.post(`${baseUrl}/api/request`, order, config);
     dispatch({ type: REQUEST_CREATE_SUCCESS, payload: data });
     dispatch({ type: REQCART_CLEAR_ITEMS, payload: data });
 
@@ -75,10 +72,7 @@ export const getRequestDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `http://localhost:5000/api/request/${id}`,
-      config
-    );
+    const { data } = await axios.get(`${baseUrl}/api/request/${id}`, config);
     //console.log("data: ", data);
     dispatch({ type: REQUEST_DETAILS_SUCCESS, payload: data });
   } catch (error) {
@@ -114,7 +108,7 @@ export const payRequest =
       };
 
       const { data } = await axios.put(
-        `http://localhost:5000/api/request/${requestId}/pay`,
+        `${baseUrl}/api/request/${requestId}/pay`,
         paymentResult,
         config
       );
@@ -150,10 +144,7 @@ export const listMyRequest = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `http://localhost:5000/api/request/`,
-      config
-    );
+    const { data } = await axios.get(`${baseUrl}/api/request/`, config);
     dispatch({ type: REQUEST_LIST_MY_SUCCESS, payload: data });
   } catch (error) {
     const message =

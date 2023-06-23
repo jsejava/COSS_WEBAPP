@@ -1,5 +1,6 @@
 import axios from "axios";
 // import { Redirect } from "react-router";
+import baseUrl from "../../components/baseUrl";
 import {
   SERVICE_CREATE_REVIEW_FAIL,
   SERVICE_CREATE_REVIEW_REQUEST,
@@ -20,10 +21,7 @@ export const listService =
   () => async (dispatch) => {
     try {
       dispatch({ type: SERVICE_LIST_REQUEST });
-      const { data } = await axios.get(
-        //`http://localhost:5000/api/services?keyword=${keyword}&pageNumber=${pageNumber}`
-        `http://localhost:5000/api/services`
-      );
+      const { data } = await axios.get(`${baseUrl}/api/services`);
       dispatch({ type: SERVICE_LIST_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
@@ -40,9 +38,7 @@ export const listService =
 export const listServiceDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: SERVICE_DETAILS_REQUEST });
-    const { data } = await axios.get(
-      `http://localhost:5000/api/services/${id}`
-    );
+    const { data } = await axios.get(`${baseUrl}/api/services/${id}`);
     dispatch({ type: SERVICE_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -73,7 +69,7 @@ export const createServiceReview =
       };
 
       await axios.post(
-        `http://localhost:5000/api/Services/${productId}/review`,
+        `${baseUrl}/api/Services/${productId}/review`,
         review,
         config
       );

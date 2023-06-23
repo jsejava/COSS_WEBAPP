@@ -1,4 +1,5 @@
 import axios from "axios";
+import baseUrl from "../../components/baseUrl";
 import { CART_CLEAR_ITEMS } from "../Constants/CartConstants";
 import { ORDER_LIST_MY_RESET } from "../Constants/OrderConstants";
 import {
@@ -32,7 +33,7 @@ export const login =
       };
 
       const { data } = await axios.post(
-        `http://localhost:5000/api/users/login`,
+        `${baseUrl}/api/users/login`,
         { email, password },
         config
       );
@@ -72,7 +73,7 @@ export const register =
       };
 
       const { data } = await axios.post(
-        `http://localhost:5000/api/users`,
+        `${baseUrl}/api/users`,
         { firstname, lastname, email, password },
         config
       );
@@ -105,10 +106,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `http://localhost:5000/api/users/${id}`,
-      config
-    );
+    const { data } = await axios.get(`${baseUrl}/api/users/${id}`, config);
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -142,7 +140,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/users/profile`,
+      `${baseUrl}/api/users/profile`,
       user,
       config
     );

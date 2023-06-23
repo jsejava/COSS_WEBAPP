@@ -9,6 +9,7 @@ import Message from "../components/LoadingError/Error";
 import moment from "moment";
 import axios from "axios";
 import { REQUEST_PAY_RESET } from "../Redux/Constants/RequestConstants";
+import addReqExpUrl from "../components/appUrl/addReqExpUrl ";
 
 const RequestScreen = ({ history, match }) => {
   window.scrollTo(0, 0);
@@ -240,7 +241,7 @@ const RequestScreen = ({ history, match }) => {
                   {!order.isPaid && (
                     <div className="col-12">
                       {
-                        <a href="http://localhost:4000/add-reqexp">
+                        <a href={addReqExpUrl}>
                           <button
                             id="myBtn"
                             className="round-black-btn mb-4"

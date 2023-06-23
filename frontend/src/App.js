@@ -31,7 +31,6 @@ import RequestScreen from "./screens/RequestScreen";
 import RequestListScreen from "./screens/RequestListScreen";
 import ReqPayScreen from "./screens/ReqPayScreen";
 import ConfReqScreen from "./screens/ConfReqScreen";
-import TooltipScreen from "./screens/tooltip/TooltipScreen";
 import Text from "./screens/Text";
 import LoginReg from "./screens/LoginReg";
 

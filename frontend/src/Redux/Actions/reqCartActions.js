@@ -1,4 +1,5 @@
 import axios from "axios";
+import baseUrl from "../../components/baseUrl";
 import {
   REQCART_ADD_ITEM,
   REQCART_REMOVE_ITEM,
@@ -8,7 +9,7 @@ import {
 
 // ADD TO CART
 export const addToReqCart = (id, qty) => async (dispatch, getState) => {
-  const { data } = await axios.get(`http://localhost:5000/api/services/${id}`);
+  const { data } = await axios.get(`${baseUrl}/api/services/${id}`);
 
   dispatch({
     type: REQCART_ADD_ITEM,
