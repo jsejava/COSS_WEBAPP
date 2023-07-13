@@ -33,6 +33,7 @@ import ReqPayScreen from "./screens/ReqPayScreen";
 import ConfReqScreen from "./screens/ConfReqScreen";
 import Text from "./screens/Text";
 import LoginReg from "./screens/LoginReg";
+import CashOrderScreen from "./screens/CashOrderScreen";
 
 const App = () => {
   return (
@@ -78,6 +79,7 @@ const App = () => {
         {/* <PrivateRouter path="/service/ConfReq" component={ConfReqScreen} /> */}
         <PrivateRouter path="/service/ConfReq" component={ConfReqScreen} />
         <PrivateRouter path="/order/:id" component={OrderScreen} />
+        <PrivateRouter path="/cashorder/:id" component={CashOrderScreen} />
         <PrivateRouter path="/service/request/:id" component={RequestScreen} />
         <PrivateRouter path="/pay" component={PayScreen} />
         {/* <PrivateRouter path="/service/pay/:id" component={ReqPayScreen} /> */}

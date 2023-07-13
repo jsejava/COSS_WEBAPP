@@ -25,13 +25,17 @@ const PaymentScreen = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (paymentMethod == null) {
-      window.alert("Select a payement Methode");
+      window.alert("Select a payment Methode");
       return;
     } else if (paymentMethod == "CampusPay") {
       dispatch(savePaymentMethod(paymentMethod));
       history.push("/placeorder");
+    } else if (paymentMethod == "Cash") {
+      dispatch(savePaymentMethod(paymentMethod));
+      history.push("/placeorder");
+      // window.alert("Cash Option");
     } else {
-      window.alert("Not Available");
+      window.alert("Option Not Available");
     }
   };
   return (
@@ -48,20 +52,34 @@ const PaymentScreen = ({ history }) => {
               <input
                 className="form-check-input"
                 type="radio"
+                value="Cash"
+                onChange={(e) => setPaymentMethod(e.target.value)}
+                name="selection"
+
+                // disabled
+              />
+              <label className="form-check-label">Cash</label>
+            </div>
+            <div className="radio-container">
+              <input
+                className="form-check-input"
+                type="radio"
                 value="CampusPay"
                 onChange={(e) => setPaymentMethod(e.target.value)}
+                name="selection"
               />
               <label className="form-check-label">CampusPay</label>
             </div>
-            <Tippy
+            {/* </Tippy> */}
+            {/* <Tippy
               className="tippy-tooltip.tomato-theme"
               delay={100}
               theme="tomato"
               placement="right"
               content={
                 <SuccessMessage
-                  title="Cash Payment Method"
-                  msg="Are Not Available For The Moment"
+                  title="Momo Payment Method"
+                  msg="Is Not Available For The Moment"
                 />
               }
             >
@@ -69,22 +87,38 @@ const PaymentScreen = ({ history }) => {
                 <input
                   className="form-check-input"
                   type="radio"
-                  value="Cash"
+                  value="Momo"
                   onChange={(e) => setPaymentMethod(e.target.value)}
+                  name="selection"
                   disabled
                 />
-                <label className="form-check-label">Cash</label>
+                <label className="form-check-label">Momo</label>
               </div>
-            </Tippy>
-            {/* <div className="radio-container">
-              <input
-                className="form-check-input"
-                type="radio"
-                value="Cash"
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
-              <label className="form-check-label">Cash</label>
-            </div> */}
+            </Tippy> */}
+            {/* <Tippy
+              className="tippy-tooltip.tomato-theme"
+              delay={100}
+              theme="tomato"
+              placement="right"
+              content={
+                <SuccessMessage
+                  title="Voda-Cash Payment Method"
+                  msg="Is Not Available For The Moment"
+                />
+              }
+            >
+              <div className="radio-container">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  value="Voda-Cash"
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  name="selection"
+                  disabled
+                />
+                <label className="form-check-label">Voda-Cash</label>
+              </div>
+            </Tippy> */}
           </div>
 
           <button type="submit">Continue</button>

@@ -906,3 +906,12 @@ ul.row-sm {
   line-height: 0.7;
   vertical-align: bottom;
 }
+.notification-badge {
+  background-color: #ff7575;
+  position: absolute;
+  top: 0px;
+  border-radius: 100px;
+  padding: 5px 7px;
+  font-size: 11px;
+  color: white;
+}

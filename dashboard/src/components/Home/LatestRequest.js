@@ -25,7 +25,7 @@ const LatestRequest = (props) => {
                       {order?.user?.firstname} {order?.user?.lastname}
                     </b>
                   </td>
-                  <td>{order?.user?.email}</td>
+                  {/* <td>{order?.user?.email}</td> */}
                   <td>Gh₵ {order.totalPrice}</td>
                   <td>
                     {order.isPaid ? (

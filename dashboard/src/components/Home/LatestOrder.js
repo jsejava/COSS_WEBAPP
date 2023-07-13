@@ -18,14 +18,24 @@ const LatestOrder = (props) => {
         <div className="table-responsive">
           <table className="table">
             <tbody>
-              {orders.slice(0, 5).map((order) => (
-                <tr key={order._id}>
+              {orders.slice(0, 10).map((order) => (
+                <tr
+                  key={order._id}
+                  className={
+                    order?.isPaid &&
+                    !order?.isDelivered &&
+                    order?.paymentMethod == "CampusPay"
+                      ? "bg-info"
+                      : ""
+                  }
+                >
                   <td>
                     <b>
                       {order?.user?.firstname} {order?.user?.lastname}
                     </b>
                   </td>
-                  <td>{order?.user?.email}</td>
+                  {/* <td>{order?.user?.email}</td> */}
+                  {/* <td>{order?.paymentMethod}</td> */}
                   <td>Gh₵ {order.totalPrice}</td>
                   <td>
                     {order.isPaid ? (
@@ -34,7 +44,9 @@ const LatestOrder = (props) => {
                       </span>
                     ) : (
                       <span className="badge rounded-pill alert-danger">
-                        Not Paid
+                        {order?.paymentMethod == "Cash"
+                          ? "Pending Order"
+                          : "Not Paid"}
                       </span>
                     )}
                   </td>

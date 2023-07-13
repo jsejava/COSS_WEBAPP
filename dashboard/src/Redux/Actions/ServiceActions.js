@@ -66,7 +66,7 @@ export const deleteService = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`${baseUrl}api/services/${id}`, config);
+    await axios.delete(`${baseUrl}/api/services/${id}`, config);
 
     dispatch({ type: SERVICE_DELETE_SUCCESS });
   } catch (error) {

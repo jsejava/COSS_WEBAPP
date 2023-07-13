@@ -42,7 +42,12 @@ const PlaceOrderScreen = ({ history }) => {
   //console.log(order);
   useEffect(() => {
     if (success) {
-      history.push(`/order/${order._id}`);
+      if (cart.paymentMethod == "Cash") {
+        history.push(`/cashorder/${order._id}`);
+        //history.push(`/shop`);
+      } else {
+        history.push(`/order/${order._id}`);
+      }
       // localStorage.setItem("orderId", order._id);
 
       dispatch({ type: ORDER_CREATE_RESET });

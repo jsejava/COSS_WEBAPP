@@ -19,9 +19,13 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 // route
-app.get("http://localhost:5000/api/users/verify/:token", (req, res) => {
-  res.render("about");
-});
+app.get(
+  // "https://campus-service-30e0c11dc5cf.herokuapp.com/api/users/verify/:token",
+  "http://localhost:5000/api/users/verify/:token",
+  (req, res) => {
+    res.render("about");
+  }
+);
 
 const userRouter = express.Router();
 
@@ -52,6 +56,7 @@ userRouter.post(
       expiresIn: "10m",
     });
 
+    //const link = `https://campus-service-30e0c11dc5cf.herokuapp.com/api/users/verify/${token}`;
     const link = `http://localhost:5000/api/users/verify/${token}`;
 
     sendEmailtoUser(link, email, pin);

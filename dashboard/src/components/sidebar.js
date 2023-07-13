@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import payAminUrl from "./appUrl/payAminUrl";
+import { useDispatch, useSelector } from "react-redux";
+import { listUser } from "../Redux/Actions/userActions";
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
+  const orderList = useSelector((state) => state.orderList);
+  const { orders } = orderList;
+  console.log(orders);
+  const result = orders?.filter(checkAdult);
+
+  function checkAdult(order) {
+    return order?.isDelivered == false;
+  }
+  console.log("result", result);
+  const userList = useSelector((state) => state.userList);
+  const { users } = userList;
+  console.log(users);
+  useEffect(() => {
+    dispatch(listUser());
+  }, [dispatch]);
   return (
     <div>
       <aside className="navbar-aside" id="offcanvas_aside">
@@ -103,7 +121,11 @@ const Sidebar = () => {
                 to="/orders"
               >
                 <i className="icon fas fa-bags-shopping"></i>
+
                 <span className="text">Orders</span>
+                <span className="notification-badge">
+                  {result?.length ? result?.length : "0"}
+                </span>
               </NavLink>
             </li>
             <li className="menu-item">
@@ -124,6 +146,9 @@ const Sidebar = () => {
               >
                 <i className="icon fas fa-user"></i>
                 <span className="text">Users</span>
+                <span className="notification-badge">
+                  {users?.length ? users?.length : "0"}
+                </span>
               </NavLink>
             </li>
             {/* <li className="menu-item">

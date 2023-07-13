@@ -53,16 +53,21 @@ const Main = () => {
         </div>
 
         {/* LATEST ORDER */}
+
         <div className="row">
-          <div className="card mb-4 shadow-sm">
-            <LatestOrder orders={orders} loading={loading} error={error} />
+          <div className="col-lg-6">
+            <div className="card mb-4 shadow-sm">
+              <LatestOrder orders={orders} loading={loading} error={error} />
+            </div>
           </div>
-          <div className="card mb-4 shadow-sm">
-            <LatestRequest
-              orders={requests}
-              loading={loading_}
-              error={error_}
-            />
+          <div className="col-lg-6">
+            <div className="card mb-4 shadow-sm">
+              <LatestRequest
+                orders={requests}
+                loading={loading_}
+                error={error_}
+              />
+            </div>
           </div>
         </div>
       </section>

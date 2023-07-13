@@ -20,6 +20,7 @@ import {
   orderDeliveredReducer,
   orderDetailsReducer,
   orderListReducer,
+  orderPayReducer,
 } from "./Reducers/OrderReducres";
 import {
   requestDeliveredReducer,
@@ -40,9 +41,12 @@ const reducer = combineReducers({
   serviceCreate: serviceCreateReducer,
   serviceEdit: serviceEditReducer,
   serviceUpdate: serviceUpdateReducer,
+
   orderList: orderListReducer,
   orderDetails: orderDetailsReducer,
   orderDeliver: orderDeliveredReducer,
+  orderPay: orderPayReducer,
+
   requestList: requestListReducer,
   requestDetails: requestDetailsReducer,
   requestDeliver: requestDeliveredReducer,

@@ -89,12 +89,14 @@ const AddServiceMain = () => {
                     <label htmlFor="product_title" className="form-label">
                       Availability
                     </label>
+                    <div className="payment-container"></div>
                     <div className="radio-container">
                       <input
                         className="form-check-input"
                         type="radio"
                         value={true}
                         onChange={(e) => setAvailability(e.target.value)}
+                        name="selection"
                       />
                       <label className="form-check-label ms-2">Yes</label>
 
@@ -103,6 +105,7 @@ const AddServiceMain = () => {
                         type="radio"
                         value={false}
                         onChange={(e) => setAvailability(e.target.value)}
+                        name="selection"
                       />
                       <label className="form-check-label ms-2">No</label>
                     </div>

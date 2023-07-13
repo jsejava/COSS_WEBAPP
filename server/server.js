@@ -17,7 +17,20 @@ dotenv.config();
 connectDatabase();
 const app = express();
 app.use(express.json());
+
+// import http from "http";
+// import { Server } from "socket.io";
+
 app.use(cors());
+
+// const server = http.createServer(app);
+
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST"],
+//   },
+// });
 
 // API
 app.use("/api/import", ImportData);
@@ -38,9 +51,13 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 // app.use(morgan("dev"));
 // route
-app.get("http://localhost:5000/api/users/verify/:token", (req, res) => {
-  res.render("about");
-});
+app.get(
+  ///"https://campus-service-30e0c11dc5cf.herokuapp.com/api/users/verify/:token",
+  "http://localhost:5000/api/users/verify/:token",
+  (req, res) => {
+    res.render("about");
+  }
+);
 
 // ERROR HANDLER
 app.use(notFound);
@@ -49,3 +66,4 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, console.log(`server running at port ${PORT}`));
+// server.listen(PORT, console.log(`server running at port ${PORT}`));
