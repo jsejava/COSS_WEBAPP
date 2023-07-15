@@ -59,7 +59,7 @@ const ServiceShipScreen = ({ history }) => {
       return setError(true);
     }
     dispatch(saveReqShippingAddress({ address, city, postalCode, country }));
-    history.push("/service/placerequest");
+    history.push("/service/payment");
   };
   return (
     <>

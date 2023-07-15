@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const OrderDetailProducts = (props) => {
   const { order, loading } = props;
-  console.log(order);
+  // console.log(order);
   if (!loading) {
     // Calculate Price
     const addDecimals = (num) => {

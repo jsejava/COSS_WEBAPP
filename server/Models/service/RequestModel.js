@@ -68,7 +68,7 @@ const requestSchema = mongoose.Schema(
     },
     paymentMethod: {
       type: String,
-      default: "Campuspay", // itemsPrice
+      required: true,
     },
     isDelivered: {
       type: Boolean,

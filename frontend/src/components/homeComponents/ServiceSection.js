@@ -13,7 +13,7 @@ const ServiceSection = (props) => {
 
   const serviceList = useSelector((state) => state.serviceList);
   const { loading, error, services, page, pages } = serviceList;
-  console.log(services);
+  // console.log(services);
 
   useEffect(() => {
     dispatch(listService());
@@ -66,9 +66,13 @@ const ServiceSection = (props) => {
 
                             <div>
                               {service.availability == true ? (
-                                <span>Available</span>
+                                <span className="text-info">
+                                  Service Available
+                                </span>
                               ) : (
-                                <span>unavailable</span>
+                                <span className="text-danger">
+                                  Service Unavailable
+                                </span>
                               )}
                             </div>
 

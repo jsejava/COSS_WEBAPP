@@ -54,6 +54,17 @@ const ShopSection = (props) => {
                               value={product.rating}
                               text={`${product.numReviews} reviews`}
                             />
+
+                            <div>
+                              {product.countInStock > 0 ? (
+                                <span className="text-info">In Stock</span>
+                              ) : (
+                                <span className="text-danger">
+                                  Out of Stock
+                                </span>
+                              )}
+                            </div>
+
                             <h3>Gh₵ {product.price}</h3>
                             {/* Gh₵ */}
                           </div>

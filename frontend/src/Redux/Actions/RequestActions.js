@@ -20,6 +20,9 @@ import axios from "axios";
 import { CART_CLEAR_ITEMS } from "../Constants/CartConstants";
 import { logout } from "./userAction";
 import { REQCART_CLEAR_ITEMS } from "../Constants/ReqCartConstants";
+import io from "socket.io-client";
+
+const socket = io.connect(`${baseUrl}`);
 
 // CREATE REQUEST
 export const createRequest = (order) => async (dispatch, getState) => {
@@ -40,6 +43,8 @@ export const createRequest = (order) => async (dispatch, getState) => {
     const { data } = await axios.post(`${baseUrl}/api/request`, order, config);
     dispatch({ type: REQUEST_CREATE_SUCCESS, payload: data });
     dispatch({ type: REQCART_CLEAR_ITEMS, payload: data });
+    console.log("createrequest", data);
+    socket.emit("send_request", data);
 
     localStorage.removeItem("reqCartItems");
   } catch (error) {

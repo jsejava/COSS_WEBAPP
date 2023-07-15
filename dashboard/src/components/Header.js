@@ -1,10 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import { useDispatch } from "react-redux";
 import { logout } from "../Redux/Actions/userActions";
+import io from "socket.io-client";
+import baseUrl from "./baseUrl";
+import NotifyUrl from "./appUrl/NotifyUrl";
+
+const socket = io.connect(`${baseUrl}`);
 
 const Header = () => {
+  const [order, setOrder] = useState([]);
+  const [request, setRequest] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
     $("[data-trigger]").on("click", function (e) {
@@ -24,12 +31,37 @@ const Header = () => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    socket.on("receive_order", (data) => {
+      setOrder((order) => [...order, [data]]);
+      localStorage.setItem("data-order", JSON.stringify(data));
+    });
+    socket.on("receive_request", (data) => {
+      setRequest((request) => [...request, [data]]);
+      localStorage.setItem("data-request", JSON.stringify(data));
+    });
+  }, [socket]);
+
+  // const items = order?.map((item) => ({
+
+  // }));
+
+  const dataOrder = localStorage.getItem("data-order")
+    ? JSON.parse(localStorage.getItem("data-request"))
+    : {};
+  const dataRequest = localStorage.getItem("data")
+    ? JSON.parse(localStorage.getItem("data"))
+    : {};
   const logoutHandler = () => {
     dispatch(logout());
   };
 
   return (
     <header className="main-header navbar">
+      <div className="iframe">
+        <iframe src={NotifyUrl}></iframe>
+      </div>
       <div className="col-search">
         <form className="searchform">
           <div className="input-group">
@@ -59,22 +91,56 @@ const Header = () => {
           <i className="md-28 fas fa-bars"></i>
         </button>
         <ul className="nav">
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link className={`nav-link btn-icon `} title="Dark mode" to="#">
               <i className="fas fa-moon"></i>
             </Link>
-          </li>
+          </li> */}
+          {/* {items.slice(0, 10).map((item) => (
+            <li className="nav-item">
+              <Link className={`nav-link btn-icon `} title="Dark mode" to="#">
+                <span></span>
+              </Link>
+            </li>
+          ))} */}
+
           <li className="nav-item">
-            <Link className="nav-link btn-icon" to="#">
-              <i className="fas fa-bell"></i>
+            <Link className="nav-link btn-icon" to="/orders">
+              <span>order</span> <i className="fas fa-bell"></i>
+              {/* <i className="icon fas fa-bags-shopping "></i> */}
+              <span
+                className={
+                  dataOrder?.paymentMethod == "Cash"
+                    ? "header-notification-badge bg-info"
+                    : "header-notification-badge bg-danger"
+                }
+              >
+                {order.length ? order.length : "0"}
+              </span>
             </Link>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" href="http://localhost:3000/">
-              Campus Store & Services
-            </a>
+
+          <li className="nav-item ms-5">
+            <Link className="nav-link btn-icon" to="/requests">
+              <span>request</span> <i className="fas fa-bell"></i>
+              {/* <i className="icon fas fa-dolly"></i> */}
+              <span
+                className={
+                  dataRequest?.paymentMethod == "Cash"
+                    ? "header-notification-badge bg-info"
+                    : "header-notification-badge bg-danger"
+                }
+              >
+                {request.length ? request.length : "0"}
+              </span>
+            </Link>
           </li>
-          <li className="dropdown nav-item">
+          {/* <li className="nav-item ms-5 me-5">
+            <a className="nav-link" href="http://localhost:3000/">
+              Campus Services
+            </a>
+          </li> */}
+          <li className="dropdown nav-item ms-5">
             <Link className="dropdown-toggle" data-bs-toggle="dropdown" to="#">
               <img
                 className="img-xs rounded-circle"

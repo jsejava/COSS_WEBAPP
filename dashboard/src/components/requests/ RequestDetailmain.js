@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import OrderDetailProducts from "./OrderDetailProducts";
 import OrderDetailInfo from "./OrderDetailInfo";
 import { Link } from "react-router-dom";
@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deliverRequest,
   getRequestDetails,
+  requestOrder,
 } from "../../Redux/Actions/RequestActions";
 import Loading from "../LoadingError/Loading";
 import Message from "../LoadingError/Error";
 import moment from "moment";
 
-const ServiceDetailmain = (props) => {
+const RequestDetailmain = (props) => {
+  const [cashOption, setCashOption] = useState(false);
   const { orderId } = props;
   const dispatch = useDispatch();
 
@@ -22,11 +24,39 @@ const ServiceDetailmain = (props) => {
   const { loading: loadingDelivered, success: successDelivered } =
     requestDeliver;
 
+  const requestPay = useSelector((state) => state.requestPay);
+  const { loading: loadingPay, success: successPay } = requestPay;
+
+  // console.log("orderPay", orderPay);
+  const userid = order?.user._id;
+  const useremail = order?.user.email;
+  const paymentResult = {
+    id: userid,
+    update_time: Date.now(),
+    email_address: useremail,
+  };
+
+  useEffect(() => {
+    if (order?.paymentMethod === "Cash") {
+      setCashOption(true);
+    } else {
+      setCashOption(false);
+    }
+  }, [order]);
+
   useEffect(() => {
     dispatch(getRequestDetails(orderId));
-  }, [dispatch, orderId, successDelivered]);
+  }, [dispatch, orderId, successDelivered, successPay]);
 
   const deliverHandler = () => {
+    if (!order.isPaid) {
+      return window.alert("Request Not Pay");
+    }
+    dispatch(deliverRequest(order));
+  };
+
+  const payHandler = () => {
+    dispatch(requestOrder(orderId, paymentResult));
     dispatch(deliverRequest(order));
   };
 
@@ -87,24 +117,45 @@ const ServiceDetailmain = (props) => {
               </div>
               {/* Payment Info */}
               <div className="col-lg-3">
-                <div className="box shadow-sm bg-light">
-                  {order.isDelivered ? (
-                    <button className="btn btn-success col-12">
-                      DELIVERED AT ({" "}
-                      {moment(order.isDeliveredAt).format("MMM Do YY")})
-                    </button>
-                  ) : (
-                    <>
-                      {loadingDelivered && <Loading />}
-                      <button
-                        onClick={deliverHandler}
-                        className="btn btn-dark col-12"
-                      >
-                        MARK AS DELIVERED
+                {cashOption ? (
+                  <div className="box shadow-sm bg-light">
+                    {order.isPaid && order.isDelivered ? (
+                      <button className="btn btn-success col-12">
+                        PAYED & DELIVERED AT ({" "}
+                        {moment(order.paidAt).format("MMM Do YY")})
                       </button>
-                    </>
-                  )}
-                </div>
+                    ) : (
+                      <>
+                        {loadingPay && <Loading />}
+                        <button
+                          onClick={payHandler}
+                          className="btn btn-dark col-12"
+                        >
+                          MARK AS PAYED & DELIVERED
+                        </button>
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  <div className="box shadow-sm bg-light">
+                    {order.isDelivered ? (
+                      <button className="btn btn-success col-12">
+                        DELIVERED AT ({" "}
+                        {moment(order.isDeliveredAt).format("MMM Do YY")})
+                      </button>
+                    ) : (
+                      <>
+                        {loadingDelivered && <Loading />}
+                        <button
+                          onClick={deliverHandler}
+                          className="btn btn-dark col-12"
+                        >
+                          MARK AS DELIVERED
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -114,4 +165,4 @@ const ServiceDetailmain = (props) => {
   );
 };
 
-export default ServiceDetailmain;
+export default RequestDetailmain;

@@ -40,13 +40,13 @@ const ShippingScreen = ({ history }) => {
   let hostel = {};
   const campus = [
     { value: "CUG", label: "CUG" },
-    { value: "UNER", label: "UNER" },
+    { value: "UENR", label: "UENR" },
     { value: "LAGON", label: "LAGON" },
   ];
 
   if (address == "CUG") {
     hostel = hostel_cug;
-  } else if (address == "UNER") {
+  } else if (address == "UENR") {
     hostel = hostel_uner;
   } else {
     hostel = hostel_lagon;

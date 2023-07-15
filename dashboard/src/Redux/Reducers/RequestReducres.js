@@ -9,6 +9,10 @@ import {
   REQUEST_LIST_FAIL,
   REQUEST_LIST_REQUEST,
   REQUEST_LIST_SUCCESS,
+  REQUEST_PAY_REQUEST,
+  REQUEST_PAY_SUCCESS,
+  REQUEST_PAY_FAIL,
+  REQUEST_PAY_RESET,
 } from "../Constants/RequestConstants";
 
 export const requestListReducer = (state = { requests: [] }, action) => {
@@ -51,6 +55,21 @@ export const requestDeliveredReducer = (state = {}, action) => {
     case REQUEST_DELIVERED_FAIL:
       return { loading: false, error: action.payload };
     case REQUEST_DELIVERED_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+// ORDER PAY
+export const requestPayReducer = (state = {}, action) => {
+  switch (action.type) {
+    case REQUEST_PAY_REQUEST:
+      return { loading: true };
+    case REQUEST_PAY_SUCCESS:
+      return { loading: false, success: true };
+    case REQUEST_PAY_FAIL:
+      return { loading: false, error: action.payload };
+    case REQUEST_PAY_RESET:
       return {};
     default:
       return state;

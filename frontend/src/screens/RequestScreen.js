@@ -19,7 +19,7 @@ const RequestScreen = ({ history, match }) => {
 
   const requestDetails = useSelector((state) => state.requestDetails);
   const { order, loading, error } = requestDetails;
-  //console.log(order);
+  // console.log(requestDetails);
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
   const userLogin = useSelector((state) => state.userLogin);

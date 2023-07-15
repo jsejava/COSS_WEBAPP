@@ -2,7 +2,7 @@ import React from "react";
 import Sidebar from "../components/sidebar";
 import Header from "../components/Header";
 
-import ServiceDetailmain from "../components/requests/ServiceDetailmain";
+import RequestDetailmain from "../components/requests/ RequestDetailmain";
 
 const RequestDetailScreen = ({ match }) => {
   const orderId = match.params.id;
@@ -11,7 +11,7 @@ const RequestDetailScreen = ({ match }) => {
       <Sidebar />
       <main className="main-wrap">
         <Header />
-        <ServiceDetailmain orderId={orderId} />
+        <RequestDetailmain orderId={orderId} />
       </main>
     </>
   );

@@ -34,6 +34,8 @@ import ConfReqScreen from "./screens/ConfReqScreen";
 import Text from "./screens/Text";
 import LoginReg from "./screens/LoginReg";
 import CashOrderScreen from "./screens/CashOrderScreen";
+import ServicePaymentScreen from "./screens/ServicePaymentScreen";
+import CashRequestScreen from "./screens/CashRequestScreen";
 
 const App = () => {
   return (
@@ -50,43 +52,67 @@ const App = () => {
           component={ShopScreen}
           exact
         />
-        <Route path="/products/:id" component={SingleProduct} />
-        <Route path="/service/services/:id" component={SingleService} />
-        <Route path="/login" component={Login} />
-        <Route path="/login-reg" component={LoginReg} />
-        <Route path="/register" component={Register} />
-        <PrivateRouter path="/profile" component={ProfileScreen} />
-        <PrivateRouter path="/order-list" component={OrderListScreen} />
+        <Route path="/products/:id" component={SingleProduct} exact />
+        <Route path="/service/services/:id" component={SingleService} exact />
+        <Route path="/login" component={Login} exact />
+        <Route path="/login-reg" component={LoginReg} exact />
+        <Route path="/register" component={Register} exact />
+        <PrivateRouter path="/profile" component={ProfileScreen} exact />
+        <PrivateRouter path="/order-list" component={OrderListScreen} exact />
         <PrivateRouter
           path="/service/request-list"
           component={RequestListScreen}
+          exact
         />
         <Route path="/cart/:id?" component={CartScreen} />
-        <Route path="/service/req-cart/:id?" component={ReqCartScreen} />
-        <Route path="/sub/:id?" component={SubScreen} />
-        <PrivateRouter path="/shipping" component={ShippingScreen} />
+        <Route path="/service/req-cart/:id?" component={ReqCartScreen} exact />
+        <Route path="/sub/:id?" component={SubScreen} exact />
+        <PrivateRouter path="/shipping" component={ShippingScreen} exact />
         <PrivateRouter
           path="/service/service-shipping"
           component={ServiceShipScreen}
+          exact
         />
-        <PrivateRouter path="/payment" component={PaymentScreen} />
-        <PrivateRouter path="/placeorder" component={PlaceOrderScreen} />
+        <PrivateRouter path="/payment" component={PaymentScreen} exact />
+        <PrivateRouter
+          path="/service/payment"
+          component={ServicePaymentScreen}
+          exact
+        />
+        <PrivateRouter path="/placeorder" component={PlaceOrderScreen} exact />
         <PrivateRouter
           path="/service/placerequest"
           component={PlaceRequestScreen}
+          exact
         />
-        <PrivateRouter path="/ConfOrder" component={ConfOrderScreen} />
+        <PrivateRouter path="/ConfOrder" component={ConfOrderScreen} exact />
         {/* <PrivateRouter path="/service/ConfReq" component={ConfReqScreen} /> */}
-        <PrivateRouter path="/service/ConfReq" component={ConfReqScreen} />
-        <PrivateRouter path="/order/:id" component={OrderScreen} />
-        <PrivateRouter path="/cashorder/:id" component={CashOrderScreen} />
-        <PrivateRouter path="/service/request/:id" component={RequestScreen} />
-        <PrivateRouter path="/pay" component={PayScreen} />
+        <PrivateRouter
+          path="/service/ConfReq"
+          component={ConfReqScreen}
+          exact
+        />
+        <PrivateRouter path="/order/:id" component={OrderScreen} exact />
+        <PrivateRouter
+          path="/cashorder/:id"
+          component={CashOrderScreen}
+          exact
+        />
+        <PrivateRouter
+          path="/service/cashorder/:id"
+          component={CashRequestScreen}
+        />
+        <PrivateRouter
+          path="/service/request/:id"
+          component={RequestScreen}
+          exact
+        />
+        <PrivateRouter path="/pay" component={PayScreen} exact />
         {/* <PrivateRouter path="/service/pay/:id" component={ReqPayScreen} /> */}
-        <PrivateRouter path="/service/pay" component={ReqPayScreen} />
+        <PrivateRouter path="/service/pay" component={ReqPayScreen} exact />
         {/* <PrivateRouter path="/Service-Req/:id" component={ServiceRequest} /> */}
 
-        <Route path="*" component={NotFound} />
+        <Route path="*" component={NotFound} exact />
       </Switch>
     </Router>
   );

@@ -19,7 +19,7 @@ const OrderDetailmain = (props) => {
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { loading, error, order } = orderDetails;
-  console.log("order", order);
+  // console.log("order", order);
   // console.log("orderId", orderId);
 
   const orderDeliver = useSelector((state) => state.orderDeliver);
@@ -28,7 +28,7 @@ const OrderDetailmain = (props) => {
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
 
-  console.log("orderPay", orderPay);
+  // console.log("orderPay", orderPay);
   const userid = order?.user._id;
   const useremail = order?.user.email;
   const paymentResult = {
@@ -36,7 +36,6 @@ const OrderDetailmain = (props) => {
     update_time: Date.now(),
     email_address: useremail,
   };
-  // console.log("paymentResult", paymentResult);
 
   useEffect(() => {
     if (order?.paymentMethod === "Cash") {
@@ -44,13 +43,7 @@ const OrderDetailmain = (props) => {
     } else {
       setCashOption(false);
     }
-
-    // return () => {
-    //   second
-    // }
   }, [order]);
-
-  console.log("CashOption", cashOption);
 
   useEffect(() => {
     dispatch(getOrderDetails(orderId));

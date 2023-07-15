@@ -52,10 +52,16 @@ const Orders = (props) => {
                         key={order._id}
                       >
                         <td>
+                          {/* <a href={`/order/${order._id}`} className="link"> */}
+                          {order.orderItems[0].name}
+                          {/* </a> */}
+                        </td>
+
+                        {/* <td>
                           <a href={`/order/${order._id}`} className="link">
                             {order._id}
                           </a>
-                        </td>
+                        </td> */}
                         <td>{order.isPaid ? <>Paid</> : <>Not Paid</>}</td>
                         <td>
                           {order.isPaid
@@ -69,20 +75,26 @@ const Orders = (props) => {
                 </table>
               </div>
               <div className="align-items-center mb-4">
-                <p className="mb-4 mt-5">
-                  <i>
+                <a href={`http://localhost:4000/order-list`} className="link">
+                  <p className="mb-4 mt-5">
+                    {/* <i>
                     Click on <b className="link">Order ID </b>To See Order
                     Details And <b className="btn-info mb-4">Make Payement</b>{" "}
                     If <b className="alert-danger">Not Paid</b>
-                  </i>
-                </p>
+                  </i> */}
+
+                    <i>
+                      Click To See Your Orders And Make Payement On CampusPay
+                    </i>
+                  </p>
+                </a>
               </div>
-              <i>
+              {/* <i>
                 <p>
                   Note That Only <b className="alert-success">Paid</b> Order
                   Will Be Delivered
                 </p>
-              </i>
+              </i> */}
             </>
           )}
         </>

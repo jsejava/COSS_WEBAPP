@@ -23,7 +23,7 @@ const SingleService = ({ history, match }) => {
   const dispatch = useDispatch();
   const serviceDetails = useSelector((state) => state.serviceDetails);
   const { loading, error, service } = serviceDetails;
-  console.log(service);
+  // console.log(service);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const serviceReviewCreate = useSelector((state) => state.serviceReviewCreate);

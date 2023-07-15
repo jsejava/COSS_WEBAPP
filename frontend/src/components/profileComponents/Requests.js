@@ -52,12 +52,13 @@ const Requests = (props) => {
                         key={order._id}
                       >
                         <td>
-                          <a
+                          {/* <a
                             href={`/service/request/${order._id}`}
                             className="link"
                           >
                             {order._id}
-                          </a>
+                          </a> */}
+                          {order.orderItems[0].name}
                         </td>
                         <td>{order.isPaid ? <>Paid</> : <>Not Paid</>}</td>
                         <td>
@@ -72,20 +73,25 @@ const Requests = (props) => {
                 </table>
               </div>
               <div className="align-items-center mb-4">
-                <p className="mb-4 mt-5">
-                  <i>
+                <a href={`http://localhost:4000/request-list`} className="link">
+                  <p className="mb-4 mt-5">
+                    {/* <i>
                     Click on <b className="link">Request ID </b>To See Request
                     Details And <b className="btn-info mb-4">Make Payement</b>{" "}
                     If <b className="alert-danger">Not Paid</b>
-                  </i>
-                </p>
+                  </i> */}
+                    <i>
+                      Click To See Your Orders And Make Payement On CampusPay
+                    </i>
+                  </p>
+                </a>
               </div>
-              <i>
+              {/* <i>
                 <p>
                   Note That Only <b className="alert-success">Paid</b> Request
                   Will Be Serves
                 </p>
-              </i>
+              </i> */}
             </>
           )}
         </>

@@ -80,9 +80,9 @@ const Register = ({ location, history }) => {
           <div className="col-12 col-lg d-flex flex-column justify-content-center align-items-center login-center">
             <div className="p-5 bg-light rounded text-center">
               <SuccessMessage
-                title=" Registration Successfully"
-                msg=" An Email is sent to your mail please verify"
-                description=" For a successul Login"
+                title=" Successful Registration"
+                msg=" An Verification Link is sent to your e-mail"
+                description="Pls Verify For a successul Login"
               />
             </div>
           </div>

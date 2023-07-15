@@ -24,13 +24,18 @@ import AddService from "./screens/AddService";
 import ServiceEditScreen from "./screens/ServiceEditScreen";
 import ResquestScreen from "./screens/ResquestScreen";
 import RequestDetailScreen from "./screens/RequestDetailScreen";
+import Notify from "./screens/Notify";
+import io from "socket.io-client";
+import baseUrl from "./components/baseUrl";
+
+const socket = io.connect(`${baseUrl}`);
 
 function App() {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  console.log("userInfo", userInfo);
+  // console.log("userInfo", userInfo);
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listProducts());
@@ -38,7 +43,22 @@ function App() {
       dispatch(listServices());
       dispatch(listRequests());
     }
-  }, [dispatch, userInfo]);
+    socket.on("receive_order", (data) => {
+      dispatch(listOrders());
+    });
+    socket.on("receive_request", (data) => {
+      dispatch(listRequests());
+    });
+  }, [dispatch, userInfo, socket]);
+
+  // useEffect(() => {
+  //   socket.on("receive_order", (data) => {
+  //     dispatch(listOrders());
+  //   });
+  //   socket.on("receive_request", (data) => {
+  //     dispatch(listRequests());
+  //   });
+  // }, [socket]);
 
   return (
     <>
@@ -69,6 +89,7 @@ function App() {
             component={ServiceEditScreen}
           />
           <Route path="/login" component={Login} />
+          <PrivateRouter path="/notify" component={Notify} />
           <PrivateRouter path="*" component={NotFound} />
         </Switch>
       </Router>

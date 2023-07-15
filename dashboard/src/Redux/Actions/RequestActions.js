@@ -9,6 +9,9 @@ import {
   REQUEST_LIST_FAIL,
   REQUEST_LIST_REQUEST,
   REQUEST_LIST_SUCCESS,
+  REQUEST_PAY_FAIL,
+  REQUEST_PAY_REQUEST,
+  REQUEST_PAY_SUCCESS,
 } from "../Constants/RequestConstants";
 import { logout } from "./userActions";
 import axios from "axios";
@@ -114,3 +117,42 @@ export const deliverRequest = (order) => async (dispatch, getState) => {
     });
   }
 };
+
+// RESQUEST PAY
+export const requestOrder =
+  (orderId, paymentResult) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: REQUEST_PAY_REQUEST });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `${baseUrl}/api/request/${orderId}/pay`,
+        paymentResult,
+        config
+      );
+      console.log("ORDER UPDATED REDUX", data);
+      dispatch({ type: REQUEST_PAY_SUCCESS, payload: data });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      if (message === "Not authorized, token failed") {
+        dispatch(logout());
+      }
+      dispatch({
+        type: REQUEST_PAY_FAIL,
+        payload: message,
+      });
+    }
+  };

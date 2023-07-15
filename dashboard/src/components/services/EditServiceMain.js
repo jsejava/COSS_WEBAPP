@@ -127,6 +127,7 @@ const EditServiceMain = (props) => {
                             type="radio"
                             value={true}
                             onChange={(e) => setAvailability(e.target.value)}
+                            name="selection"
                           />
                           <label className="form-check-label ms-2">Yes</label>
 
@@ -135,6 +136,7 @@ const EditServiceMain = (props) => {
                             type="radio"
                             value={false}
                             onChange={(e) => setAvailability(e.target.value)}
+                            name="selection"
                           />
                           <label className="form-check-label ms-2">No</label>
                         </div>

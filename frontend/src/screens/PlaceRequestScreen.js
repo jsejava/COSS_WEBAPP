@@ -11,11 +11,10 @@ const PlaceRequestScreen = ({ history }) => {
 
   const dispatch = useDispatch();
   const reqCart = useSelector((state) => state.reqCart);
-  //console.log(reqCart);
+  // console.log("reqCart", reqCart);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  //  Calculate Price
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2);
   };
@@ -47,10 +46,11 @@ const PlaceRequestScreen = ({ history }) => {
 
   useEffect(() => {
     if (success) {
-      history.push(`/service/request/${order._id}`);
-      // localStorage.setItem("requestId", order._id);
-      // const x = localStorage.getItem("requestId");
-      // console.log(x);
+      if (reqCart.reqPaymentMethod == "Cash") {
+        history.push(`/service/cashorder/${order._id}`);
+      } else {
+        history.push(`/service/request/${order._id}`);
+      }
 
       dispatch({ type: ORDER_CREATE_RESET });
     }
@@ -64,7 +64,7 @@ const PlaceRequestScreen = ({ history }) => {
       createRequest({
         orderItems: reqCart.reqCartItems,
         shippingAddress: reqCart.reqShippingAddress,
-        // paymentMethod: reqCart.paymentMethod,
+        paymentMethod: reqCart.reqPaymentMethod,
         itemsPrice: reqCart.itemsPrice,
         shippingPrice: reqCart.shippingPrice,
         taxPrice: reqCart.taxPrice,
@@ -111,7 +111,7 @@ const PlaceRequestScreen = ({ history }) => {
                 <p>
                   Name: {userInfo.firstname} {userInfo.lastname}
                 </p>
-                <p>Pay method: CampusPay</p>
+                <p>Pay method: {reqCart.reqPaymentMethod}</p>
                 {/* <p>Type: Service On Request </p> */}
               </div>
             </div>

@@ -26,6 +26,7 @@ import {
   requestDeliveredReducer,
   requestDetailsReducer,
   requestListReducer,
+  requestPayReducer,
 } from "./Reducers/RequestReducres";
 
 const reducer = combineReducers({
@@ -50,6 +51,7 @@ const reducer = combineReducers({
   requestList: requestListReducer,
   requestDetails: requestDetailsReducer,
   requestDeliver: requestDeliveredReducer,
+  requestPay: requestPayReducer,
 });
 
 // login

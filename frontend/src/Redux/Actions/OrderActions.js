@@ -17,6 +17,9 @@ import {
 import axios from "axios";
 import { CART_CLEAR_ITEMS } from "../Constants/CartConstants";
 import { logout } from "./userAction";
+import io from "socket.io-client";
+
+const socket = io.connect(`${baseUrl}`);
 
 // CREATE ORDER
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -37,6 +40,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     const { data } = await axios.post(`${baseUrl}/api/orders`, order, config);
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
     dispatch({ type: CART_CLEAR_ITEMS, payload: data });
+    socket.emit("send_order", data);
 
     localStorage.removeItem("cartItems");
   } catch (error) {

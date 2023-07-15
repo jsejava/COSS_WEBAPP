@@ -51,12 +51,12 @@ export const saveReqShippingAddress = (data) => (dispatch) => {
   localStorage.setItem("reqShippingAddress", JSON.stringify(data));
 };
 
-// // SAVE PAYMENT METHOD
-// export const savePaymentMethod = (data) => (dispatch) => {
-//   dispatch({
-//     type: REQCART_SAVE_PAYMENT_METHOD,
-//     payload: data,
-//   });
+// SAVE PAYMENT METHOD
+export const saveReqPaymentMethod = (data) => (dispatch) => {
+  dispatch({
+    type: REQCART_SAVE_PAYMENT_METHOD,
+    payload: data,
+  });
 
-//   localStorage.setItem("paymentMethod", JSON.stringify(data));
-// };
+  localStorage.setItem("ReqPaymentMethod", JSON.stringify(data));
+};

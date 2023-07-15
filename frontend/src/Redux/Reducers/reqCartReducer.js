@@ -45,7 +45,7 @@ export const reqCartReducer = (
     case REQCART_SAVE_PAYMENT_METHOD:
       return {
         ...state,
-        paymentMethod: action.payload,
+        reqPaymentMethod: action.payload,
       };
     case REQCART_CLEAR_ITEMS:
       return {
