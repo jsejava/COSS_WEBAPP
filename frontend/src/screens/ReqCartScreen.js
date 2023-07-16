@@ -16,7 +16,7 @@ const ReqCartScreen = ({ match, location, history }) => {
 
   const reqCart = useSelector((state) => state.reqCart);
   const { reqCartItems } = reqCart;
-  //console.log(reqCartItems);
+  console.log(reqCart);
 
   const total = reqCartItems
     .reduce((a, i) => a + i.qty + i.price, 0)
@@ -81,9 +81,7 @@ const ReqCartScreen = ({ match, location, history }) => {
                 </div>
                 <div className="cart-qty col-md-2 col-sm-5 mt-md-5 mt-3 mt-md-0 d-flex flex-column justify-content-center">
                   <h6>AMOUNT</h6>
-                  {/* <h2>
-                    <i>{item.provider}</i>
-                  </h2> */}
+
                   <select
                     value={item.qty}
                     onChange={(e) =>
@@ -97,6 +95,11 @@ const ReqCartScreen = ({ match, location, history }) => {
                         {(x + 1) * 10} GH¢
                       </option>
                     ))}
+                    {/* {[...Array(item.countInStock).keys()].map((x) => (
+                      <option key={x + 1} value={(x + 1) * 1}>
+                        {(x + 1) * 1} GH¢
+                      </option>
+                    ))} */}
                   </select>
                 </div>
                 <div className="cart-price mt-3 mt-md-0 col-md-2 align-items-sm-end align-items-start  d-flex flex-column justify-content-center col-sm-7">

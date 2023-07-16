@@ -7,6 +7,10 @@ import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import SuccessMessage from "../components/SuccessMessage";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const PaymentScreen = ({ history }) => {
   window.scrollTo(0, 0);
@@ -25,7 +29,24 @@ const PaymentScreen = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (paymentMethod == null) {
-      window.alert("Select a payment Methode");
+      //window.alert("Select a payment Methode");
+      let timerInterval;
+      Swal.fire({
+        title: "Select a payment Methode...",
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer().querySelector("b");
+          timerInterval = setInterval(() => {}, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+        }
+      });
       return;
     } else if (paymentMethod == "CampusPay") {
       dispatch(savePaymentMethod(paymentMethod));
@@ -35,7 +56,24 @@ const PaymentScreen = ({ history }) => {
       history.push("/placeorder");
       // window.alert("Cash Option");
     } else {
-      window.alert("Option Not Available");
+      //window.alert("Option Not Available");
+      let timerInterval;
+      Swal.fire({
+        title: "Option Not Available...",
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer().querySelector("b");
+          timerInterval = setInterval(() => {}, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+        }
+      });
     }
   };
   return (

@@ -16,7 +16,7 @@ const CashRequestScreen = ({ history, match }) => {
 
   const requestDetails = useSelector((state) => state.requestDetails);
   const { order, loading, error } = requestDetails;
-  // console.log(requestDetails);
+  // console.log(order);
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
   const userLogin = useSelector((state) => state.userLogin);
@@ -28,17 +28,19 @@ const CashRequestScreen = ({ history, match }) => {
     };
 
     order.itemsPrice = addDecimals(
-      order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+      order.orderItems.reduce((acc, item) => acc + item.qty, 0)
     );
   }
+  console.log("orderItems", order?.orderItems);
 
   useEffect(() => {
     if (!order || successPay) {
       dispatch({ type: REQUEST_PAY_RESET });
       dispatch(getRequestDetails(orderId));
-    } else if (!order.isPaid) {
+    } else if (order) {
+      dispatch(getRequestDetails(orderId));
     }
-  }, [dispatch, orderId, successPay, order]);
+  }, [dispatch, orderId, successPay]);
 
   // if (order) {
   //   const { _id } = order;
@@ -168,17 +170,16 @@ const CashRequestScreen = ({ history, match }) => {
                           </div>
                           <div className="col-md-5 col-6 d-flex align-items-center">
                             <Link to={`/products/${item.product}`}>
-                              {/* name */}
                               <h6>{item.name}</h6>
                             </Link>
                           </div>
                           <div className="mt-3 mt-md-0 col-md-2 col-6  d-flex align-items-center flex-column justify-content-center ">
-                            <h4>QUANTITY</h4>
+                            <h4>AMOUNT</h4>
                             <h6>{item.qty}</h6>
                           </div>
                           <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
-                            <h4>SUBTOTAL</h4>
-                            <h6>Gh₵ {item.qty * item.price}</h6>
+                            <h4>SERVICE</h4>
+                            <h6>Gh₵ {item.price}</h6>
                           </div>
                         </div>
                       ))}
@@ -191,13 +192,13 @@ const CashRequestScreen = ({ history, match }) => {
                     <tbody>
                       <tr>
                         <td>
-                          <strong>Products</strong>
+                          <strong>Amount</strong>
                         </td>
                         <td>Gh₵ {order.itemsPrice}</td>
                       </tr>
                       <tr>
                         <td>
-                          <strong>Delivery</strong>
+                          <strong>Service Fee</strong>
                         </td>
                         <td>Gh₵ {order.shippingPrice}</td>
                       </tr>

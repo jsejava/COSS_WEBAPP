@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createRequest } from "../Redux/Actions/RequestActions";
-import { ORDER_CREATE_RESET } from "../Redux/Constants/OrderConstants";
+
 import Header from "../components/Header";
 import Message from "../components/LoadingError/Error";
+import { REQUEST_CREATE_RESET } from "../Redux/Constants/RequestConstants";
 
 const PlaceRequestScreen = ({ history }) => {
   window.scrollTo(0, 0);
@@ -22,6 +23,7 @@ const PlaceRequestScreen = ({ history }) => {
   reqCart.itemsPrice = addDecimals(
     reqCart.reqCartItems.reduce((acc, item) => acc + item.qty, 0)
   );
+  console.log("itemsPrice", reqCart.itemsPrice);
   reqCart.shippingPrice = addDecimals(
     reqCart.reqCartItems.reduce((acc, item) => acc + item.price, 0)
   );
@@ -52,7 +54,7 @@ const PlaceRequestScreen = ({ history }) => {
         history.push(`/service/request/${order._id}`);
       }
 
-      dispatch({ type: ORDER_CREATE_RESET });
+      dispatch({ type: REQUEST_CREATE_RESET });
     }
   }, [history, dispatch, success, order]);
   const cancelOrderHandler = () => {
@@ -173,13 +175,13 @@ const PlaceRequestScreen = ({ history }) => {
               <tbody>
                 <tr>
                   <td>
-                    <strong>Total Amount</strong>
+                    <strong>Amount</strong>
                   </td>
                   <td>Gh₵ {reqCart.itemsPrice}</td>
                 </tr>
                 <tr>
                   <td>
-                    <strong>Total Service Fee</strong>
+                    <strong>Service Fee</strong>
                   </td>
                   <td>Gh₵ {reqCart.shippingPrice}</td>
                 </tr>

@@ -7,6 +7,10 @@ import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import SuccessMessage from "../components/SuccessMessage";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const ServicePaymentScreen = ({ history }) => {
   window.scrollTo(0, 0);
@@ -24,7 +28,24 @@ const ServicePaymentScreen = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (paymentMethod == null) {
-      window.alert("Select a payment Methode");
+      //window.alert("Select a payment Methode");
+      let timerInterval;
+      Swal.fire({
+        title: "Select a payment Methode...",
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer().querySelector("b");
+          timerInterval = setInterval(() => {}, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+        }
+      });
       return;
     } else if (paymentMethod == "CampusPay") {
       dispatch(saveReqPaymentMethod(paymentMethod));
@@ -34,7 +55,24 @@ const ServicePaymentScreen = ({ history }) => {
       history.push("/service/placerequest");
       // window.alert("Cash Option");
     } else {
-      window.alert("Option Not Available");
+      //window.alert("Option Not Available");
+      let timerInterval;
+      Swal.fire({
+        title: "Option Not Available...",
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer().querySelector("b");
+          timerInterval = setInterval(() => {}, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+        }
+      });
     }
   };
   return (
@@ -54,8 +92,6 @@ const ServicePaymentScreen = ({ history }) => {
                 value="Cash"
                 onChange={(e) => setPaymentMethod(e.target.value)}
                 name="selection"
-
-                // disabled
               />
               <label className="form-check-label">Cash</label>
             </div>
@@ -106,7 +142,7 @@ const ServicePaymentScreen = ({ history }) => {
                 />
               }
             >
-              <div className="radio-container">
+              <div className="radio-container">ß
                 <input
                   className="form-check-input"
                   type="radio"

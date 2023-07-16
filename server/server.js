@@ -1,3 +1,4 @@
+import baseUrl from "./config/baseUrl.js";
 import express, { json } from "express";
 import webpush from "web-push";
 import bodyParser from "body-parser";
@@ -5,7 +6,6 @@ import dotenv from "dotenv";
 import connectDatabase from "./config/MongoDb.js";
 import cors from "cors";
 import ImportData from "./DataImport.js";
-
 import { errorHandler, notFound } from "./Middleware/Errors.js";
 import userRouter from "./Routes/UserRoutes.js";
 import productRoute from "./Routes/ProductRoutes.js";
@@ -91,7 +91,7 @@ io.on("connection", (socket) => {
 
 app.get(
   ///"https://campus-service-30e0c11dc5cf.herokuapp.com/api/users/verify/:token",
-  "http://localhost:5000/api/users/verify/:token",
+  `${baseUrl}/api/users/verify/:token`,
   (req, res) => {
     res.render("about");
   }

@@ -167,6 +167,7 @@ const EditServiceMain = (props) => {
                           required
                           value={countInStock}
                           onChange={(e) => setCountInStock(e.target.value)}
+                          disabled
                         />
                       </div>
                       <div className="mb-4">

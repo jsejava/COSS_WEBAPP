@@ -8,7 +8,10 @@ import Loading from "../components/LoadingError/Loading";
 import Message from "../components/LoadingError/Error";
 import moment from "moment";
 import axios from "axios";
-import { ORDER_PAY_RESET } from "../Redux/Constants/OrderConstants";
+import {
+  ORDER_CREATE_RESET,
+  ORDER_PAY_RESET,
+} from "../Redux/Constants/OrderConstants";
 
 import addExpenceUrl from "../components/appUrl/addExpenceUrl";
 
@@ -39,9 +42,11 @@ const CashOrderScreen = ({ history, match }) => {
     if (!order || successPay) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch(getOrderDetails(orderId));
-    } else if (!order.isPaid) {
+      //dispatch({ type: ORDER_CREATE_RESET });
+    } else if (order) {
+      dispatch(getOrderDetails(orderId));
     }
-  }, [dispatch, orderId, successPay, order]);
+  }, [dispatch, orderId, successPay]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));

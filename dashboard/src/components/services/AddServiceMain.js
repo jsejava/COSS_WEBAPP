@@ -136,6 +136,7 @@ const AddServiceMain = () => {
                       required
                       value={countInStock}
                       onChange={(e) => setCountInStock(e.target.value)}
+                      disabled
                     />
                   </div>
                   <div className="mb-4">

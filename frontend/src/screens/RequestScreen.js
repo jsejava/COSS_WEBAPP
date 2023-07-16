@@ -39,9 +39,10 @@ const RequestScreen = ({ history, match }) => {
     if (!order || successPay) {
       dispatch({ type: REQUEST_PAY_RESET });
       dispatch(getRequestDetails(orderId));
-    } else if (!order.isPaid) {
+    } else if (order) {
+      dispatch(getRequestDetails(orderId));
     }
-  }, [dispatch, orderId, successPay, order]);
+  }, [dispatch, orderId, successPay]);
 
   // const successPaymentHandler = (paymentResult) => {
   //   dispatch(payRequest(orderId, paymentResult));

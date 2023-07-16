@@ -7,8 +7,9 @@ import Select from "react-select";
 const ServiceShipScreen = ({ history }) => {
   window.scrollTo(0, 0);
 
-  const cart = useSelector((state) => state.cart);
-  const { shippingAddress } = cart;
+  const reqCart = useSelector((state) => state.reqCart);
+  const { reqShippingAddress } = reqCart;
+  console.log(reqShippingAddress);
 
   const hostel_cug = [
     { value: "Chasis", label: "Chasis" },
@@ -31,10 +32,10 @@ const ServiceShipScreen = ({ history }) => {
     { value: "African Union Hall", label: "African Union Hall" },
   ];
 
-  const [address, setAddress] = useState(shippingAddress.address);
-  const [city, setCity] = useState(shippingAddress.city);
-  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
-  const [country, setCountry] = useState(shippingAddress.country);
+  const [address, setAddress] = useState(reqShippingAddress.address);
+  const [city, setCity] = useState(reqShippingAddress.city);
+  const [postalCode, setPostalCode] = useState(reqShippingAddress.postalCode);
+  const [country, setCountry] = useState(reqShippingAddress.country);
   const [error, setError] = useState(false);
 
   let hostel = {};

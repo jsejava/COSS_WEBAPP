@@ -82,7 +82,7 @@ const shippingAddressFromLocalStorage = localStorage.getItem("shippingAddress")
 const reqShippingAddressFromLocalStorage = localStorage.getItem(
   "reqShippingAddress"
 )
-  ? JSON.parse(localStorage.getItem("shippingAddress"))
+  ? JSON.parse(localStorage.getItem("reqShippingAddress"))
   : {};
 
 const initialState = {

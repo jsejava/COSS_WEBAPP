@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 import { sendEmailtoUser } from "../config/EmailTemplate.js";
 import generator from "generate-password";
 import bcrypt from "bcryptjs";
+import baseUrl from "../config/baseUrl.js";
 
 const app = express();
 //register view engine
@@ -21,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 // route
 app.get(
   // "https://campus-service-30e0c11dc5cf.herokuapp.com/api/users/verify/:token",
-  "http://localhost:5000/api/users/verify/:token",
+  `${baseUrl}/api/users/verify/:token`,
   (req, res) => {
     res.render("about");
   }
@@ -57,7 +58,7 @@ userRouter.post(
     });
 
     //const link = `https://campus-service-30e0c11dc5cf.herokuapp.com/api/users/verify/${token}`;
-    const link = `http://localhost:5000/api/users/verify/${token}`;
+    const link = `${baseUrl}/api/users/verify/${token}`;
 
     sendEmailtoUser(link, email, pin);
 
