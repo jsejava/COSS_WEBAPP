@@ -44,6 +44,7 @@ function Navbar() {
           </div>
         </div>
       </div>
+
       <nav className="nav">
         <div className="col-md-2 col-4 d-flex align-items-center navbarlogo">
           <Link className="navbar-brand" to="/">
@@ -51,44 +52,40 @@ function Navbar() {
             <img alt="logo" src="/logo/s2.jpeg" />
           </Link>
         </div>
+        <div className="pc-header">
+          <ul className={active}>
+            <li className="nav__item">
+              <a href="#" className="nav__link">
+                Home
+              </a>
+            </li>
 
-        <ul className={active}>
-          <li className="nav__item">
-            <a href="#" className="nav__link">
-              Home
-            </a>
-          </li>
-
-          <li className="nav__item">
-            <a href="/shop" className="nav__link">
-              Store
-            </a>
-          </li>
-          <li className="nav__item">
-            <a href="/service" className="nav__link">
-              Service
-            </a>
-          </li>
-          <li className="nav__item">
-            <a href="http://localhost:4000" className="nav__link">
-              Pay
-            </a>
-          </li>
-          <li className="nav__item">
-            <a href="http://localhost:4001/" className="nav__link">
-              Connect
-            </a>
-          </li>
-          {/* <li className="nav__item">
-            <a href="#" className="nav__link">
-              Contact
-            </a>
-          </li> */}
-        </ul>
-        <div onClick={navToggle} className={icon}>
-          <div className="line1"></div>
-          <div className="line2"></div>
-          <div className="line3"></div>
+            <li className="nav__item">
+              <a href="/shop" className="nav__link">
+                Store
+              </a>
+            </li>
+            <li className="nav__item">
+              <a href="/service" className="nav__link">
+                Service
+              </a>
+            </li>
+            <li className="nav__item">
+              <a href="http://localhost:4000" className="nav__link">
+                Pay
+              </a>
+            </li>
+            <li className="nav__item">
+              <a href="http://localhost:4001/" className="nav__link">
+                Connect
+              </a>
+            </li>
+          </ul>
+          <div onClick={navToggle} className={icon}>
+            <div className="line1"></div>
+            <div className="line2"></div>
+            <div className="line3"></div>
+          </div>
         </div>
       </nav>
     </>

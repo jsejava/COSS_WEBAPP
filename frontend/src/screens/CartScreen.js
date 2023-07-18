@@ -100,15 +100,31 @@ const CartScreen = ({ match, location, history }) => {
               <span className="total-price">GH¢ {total}</span>
             </div>
             <hr />
-            <div className="cart-buttons d-flex align-items-center row">
-              <Link to="/shop" className="col-md-6 ">
-                <button>Continue To Shopping</button>
-              </Link>
-              {total > 0 && (
-                <div className="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
-                  <button onClick={checkOutHandler}>Checkout</button>
-                </div>
-              )}
+            <div className="pc-header">
+              <div className="cart-buttons d-flex align-items-center row">
+                <Link to="/shop" className="col-md-6 ">
+                  <button>Continue To Shopping</button>
+                </Link>
+                {total > 0 && (
+                  <div className="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
+                    <button onClick={checkOutHandler}>Checkout</button>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="mobile-header">
+              <div className="cart-buttons d-flex justify-content-around">
+                <Link to="/shop" className="col-md-6">
+                  <button className="p-3">Continue To Shopping</button>
+                </Link>
+                {total > 0 && (
+                  <div className="col-md-6 d-flex justify-content-md-end ">
+                    <button onClick={checkOutHandler} className="p-3">
+                      Checkout
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </>
         )}

@@ -156,32 +156,67 @@ const Header = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="btn-group">
-                      <button
-                        type="button"
-                        className="name-button dropdown-toggle"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <i class="fas fa-user"></i>
-                      </button>
-                      <div className="dropdown-menu">
-                        {/* <Link className="dropdown-item" to="/login">
-                          Login
-                        </Link>
+                    // ) : (
+                    //   <div className="btn-group">
+                    //     <button
+                    //       type="button"
+                    //       className="name-button dropdown-toggle"
+                    //       data-toggle="dropdown"
+                    //       aria-haspopup="true"
+                    //       aria-expanded="false"
+                    //     >
+                    //       <i class="fas fa-user"></i>
+                    //     </button>
+                    //     <div className="dropdown-menu">
+                    //       {/* <Link className="dropdown-item" to="/login">
+                    //         Login
+                    //       </Link>
 
-                        <Link className="dropdown-item" to="/register">
-                          Register
-                        </Link> */}
-                      </div>
-                    </div>
+                    //       <Link className="dropdown-item" to="/register">
+                    //         Register
+                    //       </Link> */}
+                    //     </div>
+                    //   </div>
+                    // )}
+
+                    // <Link to="/cart" className="cart-mobile-icon">
+                    //   <i className="fas fa-shopping-bag"></i>
+                    //   <span className="badge">{cartItems.length}</span>
+                    // </Link>
+                    <>
+                      <Link to="#" className="text-warning">
+                        <i
+                          class="fa fa-shopping-basket text-warning"
+                          style={{ fontSize: "20px" }}
+                        ></i>{" "}
+                        <i>window shopping</i>
+                      </Link>
+                      {/* <Link to="/login">Login</Link> */}
+                      {/* <p>window shopping</p> */}
+                    </>
                   )}
+                  {profile ? (
+                    <>
+                      <Link to="/service/req-cart">
+                        {/* <i className="fas fa-shopping-bag"></i> */}
+                        <i className="fas fa-toolbox"></i>
+                        <span className="badge">{reqCartItems.length}</span>
+                      </Link>
+                    </>
+                  ) : null}
 
-                  <Link to="/cart" className="cart-mobile-icon">
-                    <i className="fas fa-shopping-bag"></i>
-                    <span className="badge">{cartItems.length}</span>
-                  </Link>
+                  {service ? (
+                    <Link to="/service/req-cart">
+                      {/* <i className="fas fa-shopping-bag"></i> */}
+                      <i className="fas fa-toolbox"></i>
+                      <span className="badge">{reqCartItems.length}</span>
+                    </Link>
+                  ) : (
+                    <Link to="/cart">
+                      <i className="fas fa-shopping-bag"></i>
+                      <span className="badge">{cartItems.length}</span>
+                    </Link>
+                  )}
                 </div>
                 <div className="col-12 d-flex align-items-center">
                   <form onSubmit={submitHandler} className="input-group">

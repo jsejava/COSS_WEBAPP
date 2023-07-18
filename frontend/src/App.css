@@ -178,6 +178,13 @@ textarea:focus {
   height: 250px;
   object-fit: contain;
 }
+
+.mobileShop img {
+  /* width: 200px;
+  height: 100px; */
+  margin-left: 50px;
+  /* object-fit: contain; */
+}
 .welcometext {
   padding-top: 10px;
   text-align: center;
@@ -185,7 +192,7 @@ textarea:focus {
 }
 .border-welcome {
   margin-top: 60px;
-  padding: 15px;
+  /* padding: 15px; */
   border: 1px solid black;
   border-radius: 5px;
 }
@@ -290,9 +297,32 @@ textarea:focus {
   text-transform: uppercase;
   font-size: 12px;
 }
+.mobile-form-section input[type="email"] {
+  border: 0 none;
+  border-radius: 25px;
+  color: #9b9b9b;
+  font-size: 16px;
+  font-style: normal;
+  height: 41px;
+  letter-spacing: 0;
+  text-align: left;
+  width: 180px;
+}
+.mobile-form-section input[type="submit"] {
+  background: #1cb803;
+  border: 0 none;
+  border-radius: 25px;
+  color: #fff;
+  height: 42px;
+  letter-spacing: 0;
+  margin-left: -70px;
+  padding: 0 60px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
 /* CONTACT */
 .contactInfo {
-  padding: 70px 0;
+  padding: 30px 0;
 }
 .contact-Box,
 .box-info,
@@ -696,6 +726,7 @@ textarea:focus {
   padding: 10px 30px;
   color: black;
 }
+
 .page-item.active .page-link {
   background-color: black;
   border: 1px solid black;
@@ -754,6 +785,11 @@ textarea:focus {
   height: 100%;
   object-fit: contain;
 }
+.mobileShop img {
+  width: 20%;
+  height: 50%;
+  object-fit: contain;
+}
 .pageLogoCon img {
   padding-left: 20px;
   width: 50%;
@@ -771,4 +807,73 @@ textarea:focus {
 .shop :hover {
   /* background-color: rgb(198, 236, 202); */
   background-color: whitesmoke;
+}
+
+.grid {
+  width: 100%;
+  /* height: 100%; */
+  display: grid;
+  gap: 5rem;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  /* border: 1px solid black; */
+  /* background-color: red; */
+  margin-top: 30px;
+}
+.box {
+  /* border: 5px solid black; */
+  /* background: #1cb803; */
+  width: 100%;
+
+  background: transparent;
+}
+.home .grid {
+  width: 100%;
+  /* height: 100%; */
+  display: grid;
+  gap: 5rem;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  /* border: 1px solid black; */
+  /* background-color: red; */
+  margin-top: 30px;
+}
+.home .box {
+  /* border: 5px solid black; */
+  /* background: #1cb803; */
+  width: 100%;
+  border: 1px solid black;
+  background: transparent;
+  border-radius: 10px;
+}
+.mobile-shoptext {
+  padding-top: 10px;
+  text-align: center;
+}
+.mobile-shoptext p a {
+  color: #252525;
+  font-size: 12px;
+}
+.mobile-shoptext h3 {
+  color: #252525;
+  margin-top: 13px;
+  font-weight: bold;
+  font-size: 19px;
+}
+.home {
+  margin-top: 30px;
+}
+.home-text {
+  margin: 2px;
+  text-align: center;
+  font-weight: bold;
+}
+.home-text1 {
+  margin: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+.home-img {
+  padding: 20px;
+}
+.home-img img {
+  width: 50px;
 }

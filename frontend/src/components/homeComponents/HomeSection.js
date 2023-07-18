@@ -77,7 +77,7 @@ const HomeSection = (props) => {
 
                     <div className="welcometext">
                       <p>
-                        <Link to="/services">Gaz - Electricity</Link>
+                        <Link to="/services">Gaz-Electricity</Link>
                       </p>
                     </div>
                     <Tippy

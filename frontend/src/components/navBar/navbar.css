@@ -51,7 +51,7 @@ li {
   transition: 0.3s ease-in;
 }
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .nav__toggler {
     display: block;
     cursor: pointer;
@@ -67,15 +67,15 @@ li {
     transform: translateX(100%);
     transition: 0.5s ease-in;
   }
-}
+} */
 /* Active Class */
-.nav__active {
+/* .nav__active {
   transform: translateX(0%);
-}
+} */
 
 /* Toggle Icon Animation */
 
-.toggle .line1 {
+/* .toggle .line1 {
   transform: rotate(-45deg) translate(-4px, 5px);
 }
 .toggle .line2 {
@@ -86,10 +86,10 @@ li {
 }
 .nav__item a {
   font-size: 25px;
-}
+} */
 /* .nav__item a :hover {
   color: #1cb803;
 } */
-a:hover {
+/* a:hover {
   color: #1cb803;
-}
+} */
